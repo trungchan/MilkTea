@@ -17,7 +17,7 @@ CREATE TABLE Products (
     product_name VARCHAR(255) NOT NULL,
     `description` VARCHAR(500) NOT NULL,
     price DOUBLE NOT NULL,
-    category_id INT UNSIGNED,
+    category_id INT UNSIGNED NOT NULL,
     image_url VARCHAR(255),
 	FOREIGN KEY (category_id) REFERENCES Categories(category_id)
 );
@@ -25,11 +25,10 @@ CREATE TABLE Products (
 DROP TABLE IF EXISTS `Account`;
 CREATE TABLE `Account` (
     account_id INT UNSIGNED UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
+    user_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(15),
-    address VARCHAR(400),
+    phone_number VARCHAR(15) UNIQUE,
+    `password` VARCHAR(800) NOT NULL,
     create_date DATETIME DEFAULT NOW(),
     `role` ENUM ('ADMIN','USER') DEFAULT 'USER'
 );
@@ -37,9 +36,9 @@ CREATE TABLE `Account` (
 DROP TABLE IF EXISTS Orders;
 CREATE TABLE Orders (
     order_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    account_id INT UNSIGNED,
+    account_id INT UNSIGNED NOT NULL,
     order_date DATETIME DEFAULT NOW(),
-    product_id INT UNSIGNED,
+    product_id INT UNSIGNED NOT NULL,
     quantity INT UNSIGNED NOT NULL,
     unit_price DOUBLE NOT NULL,
 	`name` VARCHAR(255),
@@ -48,6 +47,7 @@ CREATE TABLE Orders (
     address VARCHAR(400),
     order_status ENUM('PENDING', 'SHIPPED', 'DELIVERED') DEFAULT 'PENDING',
     type_pay ENUM('COD','BANKING') DEFAULT 'COD',
+    bank_number INT UNSIGNED,
     FOREIGN KEY (account_id) REFERENCES `Account`(account_id),
     FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
