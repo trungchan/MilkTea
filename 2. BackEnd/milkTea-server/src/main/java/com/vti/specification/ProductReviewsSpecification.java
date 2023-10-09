@@ -24,7 +24,8 @@ public class ProductReviewsSpecification {
             if (!StringUtils.hasText(search)) {
                 return null;
             }
-            return builder.like(root.get(ProductReviews_.reviewText), "%" + search.trim() + "%");
+//            return builder.like(root.get(ProductReviews_.reviewText), "%" + search.trim() + "%");
+            return null;
         };
     }
 
@@ -35,7 +36,8 @@ public class ProductReviewsSpecification {
             if (minRatting == null) {
                 return null;
             }
-            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.ratting),minRatting);
+//            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.ratting),minRatting);
+            return null;
         };
     }
 
@@ -44,7 +46,8 @@ public class ProductReviewsSpecification {
             if (maxRatting == null) {
                 return null;
             }
-            return builder.lessThanOrEqualTo(root.get(ProductReviews_.ratting),maxRatting);
+//            return builder.lessThanOrEqualTo(root.get(ProductReviews_.ratting),maxRatting);
+            return null;
         };
     }
     private static Specification<ProductReviews> hasReviewDateGreaterThanOrEqualTo ( LocalDate minReviewDate ) {
@@ -52,7 +55,8 @@ public class ProductReviewsSpecification {
             if (minReviewDate == null) {
                 return null;
             }
-            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.reviewDate).as(LocalDate.class),minReviewDate);
+//            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.reviewDate).as(LocalDate.class),minReviewDate);
+            return null;
         };
     }
 
@@ -61,7 +65,8 @@ public class ProductReviewsSpecification {
             if (maxReviewDate == null) {
                 return null;
             }
-            return builder.lessThanOrEqualTo(root.get(ProductReviews_.reviewDate).as(LocalDate.class),maxReviewDate);
+//            return builder.lessThanOrEqualTo(root.get(ProductReviews_.reviewDate).as(LocalDate.class),maxReviewDate);
+            return null;
         };
     }
 }
