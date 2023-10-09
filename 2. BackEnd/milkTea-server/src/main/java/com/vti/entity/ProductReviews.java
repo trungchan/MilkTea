@@ -48,5 +48,11 @@ public class ProductReviews implements Serializable {
     @CreationTimestamp
     private Date reviewDate;
 
-
+    public ProductReviews ( Products products, Account account, int ratting, String reviewText, Date reviewDate ) {
+        this.products = products;
+        this.account = account;
+        this.ratting = ratting;
+        this.reviewText = reviewText;
+        this.reviewDate = reviewDate;
+    }
 }

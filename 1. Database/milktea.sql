@@ -40,6 +40,7 @@ CREATE TABLE Orders (
     order_date DATETIME DEFAULT NOW(),
     product_id INT UNSIGNED NOT NULL,
     quantity INT UNSIGNED NOT NULL,
+    size ENUM('M','L') NOT NULL,
     unit_price DOUBLE NOT NULL,
 	`name` VARCHAR(255),
     email VARCHAR(255),
