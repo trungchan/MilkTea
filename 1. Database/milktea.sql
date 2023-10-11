@@ -16,9 +16,11 @@ CREATE TABLE Products (
     product_id INT UNSIGNED UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(255) NOT NULL,
     `description` VARCHAR(500) NOT NULL,
-    price DOUBLE NOT NULL,
+    price_M DOUBLE NOT NULL,
+    price_L DOUBLE NOT NULL,
     category_id INT UNSIGNED NOT NULL,
     image_url VARCHAR(255),
+    create_date DATETIME DEFAULT NOW(),
 	FOREIGN KEY (category_id) REFERENCES Categories(category_id)
 );
 
