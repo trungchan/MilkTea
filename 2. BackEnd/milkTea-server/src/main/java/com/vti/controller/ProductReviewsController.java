@@ -6,7 +6,7 @@ import com.vti.form.ProductReviewsFilterForm;
 import com.vti.form.ProductReviewsFormForCreatingOrUpdate;
 import com.vti.repository.IProductReviewsRepository;
 import com.vti.service.IProductReviewsService;
-import com.vti.specification.ProductReviewsSpecification;
+//import com.vti.specification.ProductReviewsSpecification;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class ProductReviewsController {
 
     @GetMapping("/{id}")
     public ProductReviewsDTO getProductReviesById (  @PathVariable("id") int id ) {
-        ProductReviews productReviews = reviewsService.getProductReviesById(id);
+        ProductReviews productReviews = reviewsService.getProductReviewsById(id);
         return mapper.map(productReviews, ProductReviewsDTO.class);
     }
 

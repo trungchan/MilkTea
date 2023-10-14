@@ -41,6 +41,11 @@ public class Orders implements Serializable {
     @Column(name = "quantity", columnDefinition = "1")
     private int quantity;
 
+    @Column(name = "size")
+    @Enumerated(EnumType.STRING)
+    private Size size;
+
+
     @Column(name = "unit_price")
     private Double unitPrice;
 
@@ -58,17 +63,17 @@ public class Orders implements Serializable {
 
     @Column(name = "order_status")
     @Enumerated(EnumType.STRING)
-    private OderStatus oderStatus;
+    private OrderStatus orderStatus = OrderStatus.PENDING;
 
     @Column(name = "type_pay")
     @Enumerated(EnumType.STRING)
-    private TypePay typePay;
+    private TypePay typePay = TypePay.COD;
 
     @Column(name = "bank_number")
     private int bankNumber;
 
 
-    public enum OderStatus {
+    public enum OrderStatus {
         PENDING, SHIPPED, DELIVERED
     }
 
@@ -76,15 +81,41 @@ public class Orders implements Serializable {
         COD, BANKING
     }
 
+    public enum Size{
+        M, L
+    }
 
+    public Orders (  Account account, Date orderDate, Products products, int quantity, Size size,
+                     String name, String email, String phone, String address,
+                    OrderStatus orderStatus, TypePay typePay, int bankNumber ) {
+        this.account = account;
+        this.orderDate = orderDate;
+        this.products = products;
+        this.quantity = quantity;
+        this.size = size;
+        this.unitPrice = calculateTotalPrice(products);
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.orderStatus = orderStatus;
+        this.typePay = typePay;
+        this.bankNumber = bankNumber;
+    }
 
-
-
-
-
-
-
-
-
-
+    public double calculateTotalPrice(Products products) {
+        double totalPrice;
+        Double priceM = products.getPriceM();
+        Double priceL = products.getPriceL();
+        double priceMValue = (priceM != null) ? priceM.doubleValue() : 0.0;
+        double priceLValue = (priceL != null) ? priceL.doubleValue() : 0.0;
+        if (size == Size.M) {
+            totalPrice = getQuantity()*priceMValue;
+            return Math.round(totalPrice);
+        } else if (size == Size.L) {
+            totalPrice = getQuantity()*priceLValue;
+            return Math.round(totalPrice);
+        }
+        return 0.0;
+    }
 }

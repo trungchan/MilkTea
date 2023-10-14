@@ -26,8 +26,10 @@ public class ProductReviewsService implements IProductReviewsService {
         return reviewsRepository.findAll(ProductReviewsSpecification.buildWhere(form),pageable);
     }
 
+
+
     @Override
-    public ProductReviews getProductReviesById ( int id ) {
+    public ProductReviews getProductReviewsById ( int id ) {
         return reviewsRepository.findById(id).orElse(null);
     }
 
@@ -36,7 +38,8 @@ public class ProductReviewsService implements IProductReviewsService {
 //        Account account
 //        Products product
 
-        return reviewsRepository.save(form.toProductReviews());
+//        return reviewsRepository.save(form.toProductReviews());
+        return null;
     }
 
     @Override

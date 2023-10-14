@@ -11,7 +11,7 @@ import java.util.List;
 public interface IProductReviewsService {
     Page<ProductReviews> getAllProductReviews( Pageable pageable, ProductReviewsFilterForm form );
 
-    ProductReviews getProductReviesById ( int id );
+    ProductReviews getProductReviewsById ( int id );
 
     ProductReviews createOrUpdateReview ( ProductReviewsFormForCreatingOrUpdate form );
 

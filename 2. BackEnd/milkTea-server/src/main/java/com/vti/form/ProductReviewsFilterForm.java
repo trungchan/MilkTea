@@ -18,4 +18,5 @@ public class ProductReviewsFilterForm {
     private int minRatting;
     private LocalDate maxReviewDate;
     private LocalDate minReviewDate;
+
 }

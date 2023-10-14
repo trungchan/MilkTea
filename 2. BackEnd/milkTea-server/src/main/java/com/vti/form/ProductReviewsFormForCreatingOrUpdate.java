@@ -27,7 +27,7 @@ public class ProductReviewsFormForCreatingOrUpdate {
     private Date reviewDate;
 
 
-    public ProductReviews toProductReviews( Products products, Account account, int ratting, String reviewText, Date reviewDate){
+    public ProductReviews toProductReviews( Products products, Account account){
         ProductReviews productReviews = new ProductReviews(products,account, ratting, reviewText, reviewDate);
         productReviews.setId(id);
         return productReviews;

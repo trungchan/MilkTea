@@ -57,4 +57,12 @@ public class Account implements Serializable {
     public enum Role {
         ADMIN, USER
     }
+    public Account ( String email, String userName, String phone, String passWord ) {
+        this.email = email;
+        this.userName = userName;
+        this.phone = phone;
+        this.date = date;
+        this.passWord = passWord;
+        this.role = Role.USER;;
+    }
 }

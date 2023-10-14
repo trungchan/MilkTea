@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -32,12 +34,21 @@ public class Products implements Serializable {
     private String description;
 
     @NotNull
-    @Column(name = "price")
-    private Double price;
+    @Column(name = "price_M")
+    private Double priceM;
+
+    @NotNull
+    @Column(name = "price_L")
+    private Double priceL;
 
     @NotNull
     @Column(name = "image_url", length = 500)
     private String imageUrl;
+
+    @Column(name = "create_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    private Date createDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)

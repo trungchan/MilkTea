@@ -1,6 +1,7 @@
 package com.vti.specification;
 
 import com.vti.entity.ProductReviews;
+import com.vti.entity.ProductReviews_;
 import com.vti.form.ProductReviewsFilterForm;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;

@@ -70,3 +70,20 @@ CREATE TABLE Token(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	token VARCHAR(800) NOT NULL
 );
+INSERT INTO Categories(category_name)
+VALUES
+(N'Set Trà Sữa Tự Nấu' ),
+(N'Trà Sữa' ),
+(N'Matcha' ),
+(N'Socola' ),
+(N'Sữa Tươi' ),
+(N'Trà Hoa Quả' );
+
+        
+INSERT INTO Products (product_name , description, price_M, price_L, category_id, image_url)
+VALUES 	('Set Trà Sữa Olong Đậm Vị 6-8 Ly', 'Mô tả đang cập nhật', 89000, 99000, 1, 'Image1'),
+		('Trà Sữa Trân Châu Đường Đen', 'Mô tả đang cập nhật', 31000, 41000, 2, 'Image2'),
+		('Mango Matcha Latte', 'Mô tả đang cập nhật', 34000, 44000, 3, 'Image3'),
+		('Trà Sữa Socola Kem Trứng', 'Mô tả đang cập nhật', 36000, 46000,4 , 'Image4'),
+		('Sữa Tươi Trân Châu Đường Đen Kem Cheese', 'Mô tả đang cập nhật', 38000, 48000, 5, 'Image5'),
+        ('Trà Xoài Machiato', 'Mô tả đang cập nhật', 38000, 48000, 6, 'Image6');
