@@ -16,7 +16,7 @@ public class ProductReviewsDTO {
     private List<AccountDTO> account;
     private List<ProductDTO> product;
     private int ratting;
-    private String revieswText;
+    private String reviewText;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date reviewDate;
 

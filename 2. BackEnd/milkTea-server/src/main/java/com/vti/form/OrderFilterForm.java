@@ -12,14 +12,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class OrderFilterForm {
-    private String Search;
-    private double maxUnitPrice;
-    private double minUnitPrice;
     private LocalDate maxOrderDate;
     private LocalDate minOrderDate;
-    private String filterSize;
-    private String filterOrderStatus;
-    private String filterTypePay;
-
 
 }
