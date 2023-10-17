@@ -36,7 +36,7 @@ public class ProductReviews implements Serializable {
     private Account account;
 
     @NotNull
-    @Column(name = "ratting")
+    @Column(name = "rating")
     private int ratting;
 
     @NotNull

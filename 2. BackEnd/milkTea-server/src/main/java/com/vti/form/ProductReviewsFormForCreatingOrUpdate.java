@@ -1,8 +1,6 @@
 package com.vti.form;
 
-import com.vti.entity.Account;
-import com.vti.entity.ProductReviews;
-import com.vti.entity.Products;
+
 import lombok.*;
 
 import java.util.Date;
@@ -27,12 +25,7 @@ public class ProductReviewsFormForCreatingOrUpdate {
     private Date reviewDate;
 
 
-    public ProductReviews toProductReviews( Products products, Account account){
-        ProductReviews productReviews = new ProductReviews(products,account, ratting, reviewText, reviewDate);
-        productReviews.setId(id);
-        return productReviews;
 
     }
 
 
-}
