@@ -40,19 +40,34 @@ CREATE TABLE Orders (
     order_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     account_id INT UNSIGNED NOT NULL,
     order_date DATETIME DEFAULT NOW(),
-    product_id INT UNSIGNED NOT NULL,
-    quantity INT UNSIGNED NOT NULL,
-    size ENUM('M','L') NOT NULL,
-    unit_price DOUBLE NOT NULL,
+    FOREIGN KEY (account_id) REFERENCES `Account`(account_id)
+);
+
+DROP TABLE IF EXISTS Payments;
+CREATE TABLE Payments (
+    payment_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    account_id INT UNSIGNED NOT NULL,
+    payment_date DATETIME DEFAULT NOW(),
+    total_payment DOUBLE NOT NULL,
 	`name` VARCHAR(255),
     email VARCHAR(255),
     phone_number VARCHAR(15),
     address VARCHAR(400),
-    order_status ENUM('PENDING', 'SHIPPED', 'DELIVERED') DEFAULT 'PENDING',
     type_pay ENUM('COD','BANKING') DEFAULT 'COD',
     bank_number INT UNSIGNED,
-    FOREIGN KEY (account_id) REFERENCES `Account`(account_id),
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+    FOREIGN KEY (account_id) REFERENCES `Account`(account_id)
+);
+
+DROP TABLE IF EXISTS OrderDetails;
+CREATE TABLE OrderDetails (
+    order_details_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    order_id INT UNSIGNED NOT NULL,
+    product_id INT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED NOT NULL,
+    size ENUM('M','L') NOT NULL,
+    unit_price DOUBLE NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES Products(product_id),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id)
 );
 
 CREATE TABLE ProductReviews (
