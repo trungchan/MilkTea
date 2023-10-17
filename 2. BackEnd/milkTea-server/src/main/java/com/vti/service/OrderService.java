@@ -1,8 +1,10 @@
 package com.vti.service;
 
+import com.vti.entity.Account;
 import com.vti.entity.Orders;
 import com.vti.form.OrderFilterForm;
 import com.vti.form.OrderFormForCreatingOrUpdate;
+import com.vti.repository.IAccountRepository;
 import com.vti.repository.IOrderRepository;
 import com.vti.specification.OrdersSpectification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class OrderService implements IOrderService {
     @Autowired
     private IOrderRepository orderRepository;
 
+    @Autowired
+    private IAccountRepository accountRepository;
+
+
 
      @Override
     public Page<Orders> getAllOrder ( Pageable pageable, OrderFilterForm form ) {
@@ -33,11 +39,8 @@ public class OrderService implements IOrderService {
 
     @Override
     public Orders createOrUpdateOrder ( OrderFormForCreatingOrUpdate form ) {
-//        Account account
-//        Products product
-
-//        return orderRepository.save(form.toProductReviews());
-        return null;
+       Account account = accountRepository.findById(form.getAccountId()).get();
+       return orderRepository.save(form.toOrder(account));
     }
 
     @Override
