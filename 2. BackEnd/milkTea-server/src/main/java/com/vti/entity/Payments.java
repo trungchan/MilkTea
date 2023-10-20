@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Entity
 @Table(name = "Payments", catalog = "milk_tea_oder")

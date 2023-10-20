@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Entity
 @Table(name = "OrderDetails", catalog = "milk_tea_oder")
@@ -45,12 +45,12 @@ public class OrderDetails implements Serializable {
     private Double unitPrice;
 
 
-    public enum Size{
+    public enum Size {
         M, L
     }
 
-    public OrderDetails ( Orders orders, Products products, int quantity, Size size
-                          ) {
+    public OrderDetails(Orders orders, Products products, int quantity, Size size
+    ) {
         this.orders = orders;
         this.products = products;
         this.quantity = quantity;
@@ -65,10 +65,10 @@ public class OrderDetails implements Serializable {
         double priceMValue = (priceM != null) ? priceM.doubleValue() : 0.0;
         double priceLValue = (priceL != null) ? priceL.doubleValue() : 0.0;
         if (size == Size.M) {
-            totalPrice = getQuantity()*priceMValue;
+            totalPrice = getQuantity() * priceMValue;
             return Math.round(totalPrice);
         } else if (size == Size.L) {
-            totalPrice = getQuantity()*priceLValue;
+            totalPrice = getQuantity() * priceLValue;
             return Math.round(totalPrice);
         }
         return 0.0;
