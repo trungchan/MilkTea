@@ -5,12 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.criterion.Order;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -23,7 +20,7 @@ public class OrderDetails implements Serializable {
     @Column(name = "order_details_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
@@ -43,7 +40,6 @@ public class OrderDetails implements Serializable {
 
     @Column(name = "unit_price")
     private Double unitPrice;
-
 
     public enum Size {
         M, L

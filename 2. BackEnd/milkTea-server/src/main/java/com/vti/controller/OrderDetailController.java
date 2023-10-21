@@ -1,6 +1,7 @@
 package com.vti.controller;
 
 import com.vti.entity.OrderDetails;
+import com.vti.form.OrderDetailsFormForCreatingOrUpdating;
 import com.vti.service.IOrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +15,9 @@ import java.util.List;
 public class OrderDetailController {
     @Autowired
     private IOrderDetailService orderDetailService;
-    
+
     @PostMapping
-    public ResponseEntity<OrderDetails> createOrderDetail(@RequestBody OrderDetails orderDetail) {
+    public ResponseEntity<OrderDetails> createOrderDetail(@RequestBody OrderDetailsFormForCreatingOrUpdating orderDetail) {
         OrderDetails createdOrderDetail = orderDetailService.createOrderDetail(orderDetail);
         return new ResponseEntity<>(createdOrderDetail, HttpStatus.CREATED);
     }
@@ -32,7 +33,7 @@ public class OrderDetailController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OrderDetails> updateOrderDetail(@PathVariable("id") Long id, @RequestBody OrderDetails updatedOrderDetail) {
+    public ResponseEntity<OrderDetails> updateOrderDetail(@PathVariable("id") Long id, @RequestBody OrderDetailsFormForCreatingOrUpdating updatedOrderDetail) {
         OrderDetails orderDetail = orderDetailService.getOrderDetailById(id);
         if (orderDetail != null) {
             updatedOrderDetail.setId(orderDetail.getId());
