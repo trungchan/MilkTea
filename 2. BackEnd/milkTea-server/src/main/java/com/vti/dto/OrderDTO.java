@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO {
     private int id;
-    private List<AccountDTO> account;
+    private String accountId;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date orderDate;
 

@@ -20,7 +20,7 @@ public class ProductReviewsFormForCreatingOrUpdate {
     private int accountId;
 
     private int productsId;
-    private int ratting;
+    private int rating;
 
     private String reviewText;
 
@@ -28,7 +28,7 @@ public class ProductReviewsFormForCreatingOrUpdate {
 
 
     public ProductReviews toProductReviews( Products products, Account account){
-        ProductReviews productReviews = new ProductReviews(products,account, ratting, reviewText, reviewDate);
+        ProductReviews productReviews = new ProductReviews(products,account, rating, reviewText, reviewDate);
         productReviews.setId(id);
         return productReviews;
 

@@ -36,8 +36,8 @@ public class ProductReviews implements Serializable {
     private Account account;
 
     @NotNull
-    @Column(name = "ratting")
-    private int ratting;
+    @Column(name = "rating")
+    private int rating;
 
     @NotNull
     @Column(name = "review_text", length = 800)
@@ -48,10 +48,10 @@ public class ProductReviews implements Serializable {
     @CreationTimestamp
     private Date reviewDate;
 
-    public ProductReviews ( Products products, Account account, int ratting, String reviewText, Date reviewDate ) {
+    public ProductReviews ( Products products, Account account, int rating, String reviewText, Date reviewDate ) {
         this.products = products;
         this.account = account;
-        this.ratting = ratting;
+        this.rating = rating;
         this.reviewText = reviewText;
         this.reviewDate = reviewDate;
     }

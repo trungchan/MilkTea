@@ -14,8 +14,8 @@ public class ProductReviewsSpecification {
             return null;
         }
         return  hasReviewTextlike(form.getSearch()).
-                and(hasRattingGreaterThanOrEqualTo(form.getMinRatting())).
-                and(hasRattingLessThanOrEqualTo(form.getMaxRatting())).
+                and(hasRattingGreaterThanOrEqualTo(form.getMinRating())).
+                and(hasRattingLessThanOrEqualTo(form.getMaxRating())).
                 and(hasReviewDateGreaterThanOrEqualTo(form.getMinReviewDate())).
                 and(hasReviewDateLessThanOrEqualTo(form.getMaxReviewDate()));
     }
@@ -36,7 +36,7 @@ public class ProductReviewsSpecification {
             if (minRatting == null) {
                 return null;
             }
-            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.ratting),minRatting);
+            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.rating),minRatting);
         };
     }
 
@@ -45,7 +45,7 @@ public class ProductReviewsSpecification {
             if (maxRatting == null) {
                 return null;
             }
-            return builder.lessThanOrEqualTo(root.get(ProductReviews_.ratting),maxRatting);
+            return builder.lessThanOrEqualTo(root.get(ProductReviews_.rating),maxRatting);
         };
     }
     private static Specification<ProductReviews> hasReviewDateGreaterThanOrEqualTo ( LocalDate minReviewDate ) {

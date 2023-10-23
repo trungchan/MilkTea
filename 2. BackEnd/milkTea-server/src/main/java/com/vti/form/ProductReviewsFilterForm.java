@@ -14,8 +14,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ProductReviewsFilterForm {
     private String search;
-    private int maxRatting;
-    private int minRatting;
+    private int maxRating;
+    private int minRating;
     private LocalDate maxReviewDate;
     private LocalDate minReviewDate;
 

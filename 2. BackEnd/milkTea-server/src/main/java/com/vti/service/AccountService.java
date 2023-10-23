@@ -6,9 +6,9 @@ import com.vti.entity.Account;
 import com.vti.form.AccountFromForCreatingOrUpdating;
 import com.vti.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public class AccountService implements IAccountService
     @Autowired
     private IAccountRepository accountRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -63,15 +63,20 @@ public class AccountService implements IAccountService
 
     @Override
     public Account createAccountRegister ( AccountFromForCreatingOrUpdating form ) {
-        Account account = form.toAccount();
-        account.setPassWord(passwordEncoder.encode(form.getPassword()));
-        return accountRepository.save(account);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException {
         return null;
     }
+
+//    @Override
+//    public Account createAccountRegister ( AccountFromForCreatingOrUpdating form ) {
+//        Account account = form.toAccount();
+//        account.setPassWord(passwordEncoder.encode(form.getPassword()));
+//        return accountRepository.save(account);
+//    }
+
+//    @Override
+//    public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException {
+//        return null;
+//    }
 
 //    @Override
 //    public UserDetails loadUserByUsername ( String userName ) throws UsernameNotFoundException {

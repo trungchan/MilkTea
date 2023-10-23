@@ -5,11 +5,13 @@ import com.vti.entity.Account;
 import com.vti.entity.ProductReviews;
 import com.vti.form.AccountFromForCreatingOrUpdating;
 import com.vti.form.ProductReviewsFormForCreatingOrUpdate;
-import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface IAccountService extends UserDetailsService {
+public interface IAccountService
+//        extends UserDetailsService
+{
     List<Account> getAllUsers();
     LoginDTO findByUserName( String userName);
 
