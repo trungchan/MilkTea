@@ -2,11 +2,12 @@ package com.vti.service;
 
 import com.vti.entity.Payments;
 import com.vti.form.PaymentFormForCreatingOrUpdating;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface IPaymentService {
-    Payments createPayment(Payments payment);
 
     Payments getPaymentById(Long id);
 
@@ -14,10 +15,8 @@ public interface IPaymentService {
 
     boolean deletePayment(Long id);
 
+    Page<Payments> getAllPayments(Pageable pageable, String search);
 
-
-
-    List<Payments> getAllPayments();
 
     Payments updatePayment(PaymentFormForCreatingOrUpdating paymentUpdatingForm);
 }

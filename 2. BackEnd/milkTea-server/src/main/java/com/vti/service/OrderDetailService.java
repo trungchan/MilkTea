@@ -3,10 +3,14 @@ package com.vti.service;
 import com.vti.entity.OrderDetails;
 import com.vti.form.OrderDetailsFormForCreatingOrUpdating;
 import com.vti.repository.IOrderDetailRepository;
+import com.vti.specification.OderDetailSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+@Service
 public class OrderDetailService implements IOrderDetailService{
     @Autowired
     private IOrderDetailRepository orderDetailRepository;
@@ -36,8 +40,18 @@ public class OrderDetailService implements IOrderDetailService{
     }
 
     @Override
-    public List<OrderDetails> getAllOrderDetails() {
-        return orderDetailRepository.findAll();
+    public Page<OrderDetails> getAllOrderDetails(Pageable pageable, String search) {
+        Specification<OrderDetails> where = null;
+        if (!StringUtils.isEmpty(search)) {
+            OderDetailSpecification nameSpecification = new OderDetailSpecification("order", "LIKE", search);
+            OderDetailSpecification priceSpecification = new OderDetailSpecification("product", "LIKE", search);
+            OderDetailSpecification infoSpecification = new OderDetailSpecification("size", "LIKE", search);
+            OderDetailSpecification categorySpecification = new OderDetailSpecification("quantity", "LIKE", search);
+
+            where = Specification.where(nameSpecification).or(priceSpecification).or(infoSpecification)
+                    .or(categorySpecification);
+        }
+        return orderDetailRepository.findAll(where, pageable);
     }
 
     @Override

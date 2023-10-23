@@ -1,14 +1,17 @@
 package com.vti.controller;
 
+import com.vti.dto.PaymentDTO;
 import com.vti.entity.Payments;
 import com.vti.form.PaymentFormForCreatingOrUpdating;
 import com.vti.service.IPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.function.Function;
 
 @RestController
 @RequestMapping("/payments")
@@ -21,13 +24,13 @@ public class PaymentController {
     }
 
     @PostMapping
-    public ResponseEntity<Payments> createPayment(@RequestBody PaymentFormForCreatingOrUpdating paymentForm) {
+    public ResponseEntity<?> createPayment(@RequestBody PaymentFormForCreatingOrUpdating paymentForm) {
         Payments createdPayment = paymentService.createPayment(paymentForm);
         return new ResponseEntity<>(createdPayment, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Payments> getPaymentById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getPaymentById(@PathVariable("id") Long id) {
         Payments payment = paymentService.getPaymentById(id);
         if (payment != null) {
             return new ResponseEntity<>(payment, HttpStatus.OK);
@@ -35,9 +38,10 @@ public class PaymentController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     // Update an existing payment
     @PutMapping("/{id}")
-    public ResponseEntity<Payments> updatePayment(@PathVariable("id") Long id, @RequestBody PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
+    public ResponseEntity<?> updatePayment(@PathVariable("id") Long id, @RequestBody PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
         Payments payment = paymentService.getPaymentById(id);
         if (payment != null) {
             payment.setId(paymentUpdatingForm.getId()); // Set the ID of the updated payment
@@ -50,7 +54,7 @@ public class PaymentController {
 
     // Delete a payment by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePayment(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deletePayment(@PathVariable("id") Long id) {
         boolean deleted = paymentService.deletePayment(id);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -61,8 +65,22 @@ public class PaymentController {
 
     // Retrieve all payments
     @GetMapping
-    public ResponseEntity<List<Payments>> getAllPayments() {
-        List<Payments> payments = paymentService.getAllPayments();
-        return new ResponseEntity<>(payments, HttpStatus.OK);
+    public ResponseEntity<?> getAllPayments(Pageable pageable, @RequestParam(required = false) String search) {
+        Page<Payments> paymentsPage = paymentService.getAllPayments(pageable, search);
+        Page<PaymentDTO> paymentDTOS = paymentsPage.map(new Function<Payments, PaymentDTO>() {
+            @Override
+            public PaymentDTO apply(Payments payments) {
+                PaymentDTO paymentDTO = new PaymentDTO();
+                paymentDTO.setId((long) payments.getId());
+                paymentDTO.setName(payments.getName());
+                paymentDTO.setAccount(payments.getAccount());
+                paymentDTO.setEmail(payments.getEmail());
+                paymentDTO.setPhone(payments.getPhone());
+                paymentDTO.setAddress(payments.getAddress());
+                paymentDTO.setBankNumber((long) payments.getBankNumber());
+                return paymentDTO;
+            }
+        });
+        return new ResponseEntity<>(paymentDTOS, HttpStatus.OK);
     }
 }
