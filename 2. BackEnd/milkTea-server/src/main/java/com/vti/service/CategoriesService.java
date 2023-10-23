@@ -3,8 +3,13 @@ package com.vti.service;
 import com.vti.entity.Categories;
 import com.vti.form.CategoriesFormForCreatingOrUpdating;
 import com.vti.repository.ICategoriesRepository;
+import com.vti.specification.CategoriesSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -16,8 +21,14 @@ public class CategoriesService implements ICategoriesService {
 
 
     @Override
-    public List<Categories> getAllCategories(){
-        return categoriesRepository.findAll();
+    public Page<Categories> getAllCategories(Pageable pageable, String search){
+        Specification<Categories> where = null;
+        if (!StringUtils.isEmpty(search)) {
+            CategoriesSpecification nameSpecification = new CategoriesSpecification("name", "EQUAL", search);
+            where = Specification.where(nameSpecification);
+        }
+
+        return categoriesRepository.findAll(where, pageable);
     }
 
     @Override

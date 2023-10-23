@@ -2,12 +2,14 @@ package com.vti.service;
 
 import com.vti.entity.Categories;
 import com.vti.form.CategoriesFormForCreatingOrUpdating;
+import org.springframework.data.domain.Page;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ICategoriesService {
 
-    List<Categories> getAllCategories();
+    Page<Categories> getAllCategories(Pageable pageable, String search);
 
     Categories getCategoriesById(int id);
 

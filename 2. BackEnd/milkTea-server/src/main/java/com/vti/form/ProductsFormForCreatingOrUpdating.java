@@ -17,7 +17,7 @@ public class ProductsFormForCreatingOrUpdating {
     private String description;
     private Double priceM;
     private Double priceL;
-    private String categories;
+    private int categoryId;
     private String imageUrl;
 
     @JsonFormat(pattern = "yyyy-MM-dd")

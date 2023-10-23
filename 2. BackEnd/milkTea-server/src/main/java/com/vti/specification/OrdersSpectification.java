@@ -15,7 +15,7 @@ public class OrdersSpectification {
         }
         return
                 hasOrderDateGreaterThanOrEqualTo(form.getMinOrderDate()).
-                and(hasOrderDateLessThanOrEqualTo(form.getMaxOrderDate()));
+                        and(hasOrderDateLessThanOrEqualTo(form.getMaxOrderDate()));
     }
 
     private static Specification<Orders> hasOrderDateGreaterThanOrEqualTo ( LocalDate minOrderDate ) {

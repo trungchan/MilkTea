@@ -1,5 +1,7 @@
 package com.vti.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.vti.dto.ProductsDto;
 import com.vti.entity.Products;
 import com.vti.form.CategoriesFormForCreatingOrUpdating;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 @RestController
 @RequestMapping(value = "/api/v1/products")
@@ -22,25 +25,26 @@ public class ProductsController {
     private IProductsService productsService;
 
     @GetMapping()
-    public ResponseEntity<?> getAllProducts() {
-        List<Products> productsList = productsService.getAllProducts();
+    public ResponseEntity<?> getAllProducts(Pageable pageable, @RequestParam(required = false) String search) {
+        Page<Products> entities  = productsService.getAllProducts(pageable, search);
 
-        List<ProductsDto> dtos = new ArrayList<>();
+        Page<ProductsDto> dtoPage  = entities.map(new Function<Products, ProductsDto>(){
+            @Override
+            public ProductsDto apply(Products products) {
+                ProductsDto dto = new ProductsDto(
+                        products.getId(),
+                        products.getProductName(),
+                        products.getDescription(),
+                        products.getPriceM(),
+                        products.getPriceL(),
+                        products.getImageUrl(),
+                        products.getCategories().getName().toString(),
+                        products.getCreateDate());
+                return dto;
+            }
+        });
 
-
-        for (Products products : productsList) {
-            ProductsDto productsDto = new ProductsDto(
-                    products.getId(),
-                    products.getProductName(),
-                    products.getDescription(),
-                    products.getPriceM(),
-                    products.getPriceL(),
-                    products.getImageUrl(),
-                    products.getCategories().getName().toString(),
-                    products.getCreateDate());
-            dtos.add(productsDto);
-        }
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+        return new ResponseEntity<>(dtoPage, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
@@ -59,7 +63,7 @@ public class ProductsController {
         return new ResponseEntity<ProductsDto>(productsDto, HttpStatus.OK);
     }
 
-//    createNewProducts & updateProducts >> chưa chạy
+
     @PostMapping()
     public ResponseEntity<?> createNewProducts(@RequestBody ProductsFormForCreatingOrUpdating form) {
         productsService.createNewProducts(form);

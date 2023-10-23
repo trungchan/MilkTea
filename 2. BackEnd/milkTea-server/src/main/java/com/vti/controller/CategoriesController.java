@@ -6,12 +6,13 @@ import com.vti.entity.Categories;
 import com.vti.form.CategoriesFormForCreatingOrUpdating;
 import com.vti.service.ICategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+import java.util.function.Function;
 
 @RestController
 @RequestMapping(value = "/api/v1/categories")
@@ -22,17 +23,19 @@ public class CategoriesController {
     private ICategoriesService categoriesService;
 
     @GetMapping()
-    public ResponseEntity<?> getAllCategories() {
-        List<Categories> categoriesList = categoriesService.getAllCategories();
+    public ResponseEntity<?> getAllCategories(Pageable pageable, @RequestParam(required = false) String search) {
+        Page<Categories> entities = categoriesService.getAllCategories(pageable, search);
 
-        List<CategoriesDto> dtos = new ArrayList<>();
-        for (Categories categories : categoriesList) {
+        Page<CategoriesDto> dtoPage= entities.map(new Function<Categories, CategoriesDto>() {
+            @Override
+            public CategoriesDto apply(Categories categories) {
+                CategoriesDto dto = new CategoriesDto(categories.getId(), categories.getName().toString());
 
-            CategoriesDto categoriesDto = new CategoriesDto(categories.getId(), categories.getName().toString());
+                return dto;
+            }
 
-            dtos.add(categoriesDto);
-        }
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+        });
+        return new ResponseEntity<>(dtoPage, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
