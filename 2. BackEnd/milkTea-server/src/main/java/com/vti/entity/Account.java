@@ -52,8 +52,6 @@ public class Account implements Serializable {
 
     @OneToMany(mappedBy = "account")
     private List<ProductReviews> productReviews;
-    @OneToMany(mappedBy = "account")
-    private List<Payments> payments;
 
 
     public enum Role {

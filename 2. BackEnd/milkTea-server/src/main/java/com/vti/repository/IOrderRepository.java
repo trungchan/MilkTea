@@ -15,4 +15,6 @@ public interface IOrderRepository extends JpaRepository<Orders,Integer>, JpaSpec
     @Transactional
     @Query("DELETE FROM Orders WHERE id IN(:ids)")
     public int deleteManyReviews(@Param("ids") List<Integer> idDeleteList);
+//    void deleteByOrderDetailId(Integer id);
+//    void deleteByPaymentById(Integer id);
 }

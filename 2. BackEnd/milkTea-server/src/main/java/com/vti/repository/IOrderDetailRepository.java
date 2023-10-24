@@ -8,4 +8,5 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetails, Inte
     boolean existsById(Long id);
 
     void deleteById(Long id);
+
 }

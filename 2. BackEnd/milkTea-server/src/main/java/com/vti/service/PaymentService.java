@@ -27,7 +27,7 @@ public class PaymentService implements IPaymentService {
     public Payments createPayment(PaymentFormForCreatingOrUpdating paymentForm) {
         Payments payments = new Payments();
         payments.setName(paymentForm.getName());
-        payments.setAccount(paymentForm.getAccount());
+        payments.setOrders(paymentForm.getOrders());
         payments.setAddress(paymentForm.getAddress());
         payments.setPhone(paymentForm.getPhone());
         payments.setEmail(paymentForm.getEmail());
@@ -67,7 +67,7 @@ public class PaymentService implements IPaymentService {
     public Payments updatePayment(PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
         Payments payments = new Payments();
         payments.setName(paymentUpdatingForm.getName());
-        payments.setAccount(paymentUpdatingForm.getAccount());
+        payments.setOrders(paymentUpdatingForm.getOrders());
         payments.setAddress(paymentUpdatingForm.getAddress());
         payments.setPhone(paymentUpdatingForm.getPhone());
         payments.setEmail(paymentUpdatingForm.getEmail());

@@ -7,17 +7,31 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class ProductReviewsSpecification {
     public static Specification<ProductReviews> buildWhere ( ProductReviewsFilterForm form ) {
         if (form == null) {
             return null;
         }
-        return  hasReviewTextlike(form.getSearch()).
-                and(hasRattingGreaterThanOrEqualTo(form.getMinRating())).
-                and(hasRattingLessThanOrEqualTo(form.getMaxRating())).
-                and(hasReviewDateGreaterThanOrEqualTo(form.getMinReviewDate())).
-                and(hasReviewDateLessThanOrEqualTo(form.getMaxReviewDate()));
+        Specification<ProductReviews> where = hasReviewTextlike(form.getSearch());
+        if (form.getMinRating() != 0){
+            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
+        }
+        if (form.getMaxRating() != 0){
+            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
+        }
+        if (form.getMaxReviewDate() != null){
+            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
+        }
+        if (Objects.nonNull(form.getMinReviewDate())){
+            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
+        }
+        return  where;
+//                and(hasRattingGreaterThanOrEqualTo(form.getMinRating())).
+//                and(hasRattingLessThanOrEqualTo(form.getMaxRating()));
+//                and(hasReviewDateGreaterThanOrEqualTo(form.getMinReviewDate())).
+//                and(hasReviewDateLessThanOrEqualTo(form.getMaxReviewDate()));
     }
 
     private static Specification<ProductReviews> hasReviewTextlike ( String search ) {

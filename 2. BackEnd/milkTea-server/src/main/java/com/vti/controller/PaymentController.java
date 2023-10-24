@@ -73,7 +73,7 @@ public class PaymentController {
                 PaymentDTO paymentDTO = new PaymentDTO();
                 paymentDTO.setId((long) payments.getId());
                 paymentDTO.setName(payments.getName());
-                paymentDTO.setAccount(payments.getAccount());
+                paymentDTO.setOrders(payments.getOrders());
                 paymentDTO.setEmail(payments.getEmail());
                 paymentDTO.setPhone(payments.getPhone());
                 paymentDTO.setAddress(payments.getAddress());

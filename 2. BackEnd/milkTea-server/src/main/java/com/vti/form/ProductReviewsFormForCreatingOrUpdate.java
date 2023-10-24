@@ -31,7 +31,6 @@ public class ProductReviewsFormForCreatingOrUpdate {
         ProductReviews productReviews = new ProductReviews(products,account, rating, reviewText, reviewDate);
         productReviews.setId(id);
         return productReviews;
-
     }
 
 

@@ -5,6 +5,7 @@ import com.vti.entity.ProductReviews;
 import com.vti.entity.Products;
 import com.vti.form.ProductReviewsFilterForm;
 import com.vti.form.ProductReviewsFormForCreatingOrUpdate;
+import com.vti.repository.IOrderDetailRepository;
 import com.vti.repository.IProductReviewsRepository;
 import com.vti.specification.ProductReviewsSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.List;
 public class ProductReviewsService implements IProductReviewsService {
     @Autowired
     private IProductReviewsRepository reviewsRepository;
+
+    @Autowired
+    private IOrderDetailRepository orderDetailRepository;
 
 
     @Override
@@ -35,10 +39,7 @@ public class ProductReviewsService implements IProductReviewsService {
 
     @Override
     public ProductReviews createOrUpdateReview ( ProductReviewsFormForCreatingOrUpdate form ) {
-//        Account account
-//        Products product
-
-//        return reviewsRepository.save(form.toProductReviews());
+    //
         return null;
     }
 
