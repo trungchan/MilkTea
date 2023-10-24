@@ -1,5 +1,6 @@
 package com.vti.form;
 
+
 import com.vti.entity.Account;
 import com.vti.entity.ProductReviews;
 import com.vti.entity.Products;
@@ -27,11 +28,11 @@ public class ProductReviewsFormForCreatingOrUpdate {
     private Date reviewDate;
 
 
-    public ProductReviews toProductReviews( Products products, Account account){
-        ProductReviews productReviews = new ProductReviews(products,account, rating, reviewText, reviewDate);
+    public ProductReviews toProductReviews ( Products products, Account account ) {
+        ProductReviews productReviews = new ProductReviews(products, account, rating, reviewText, reviewDate);
         productReviews.setId(id);
         return productReviews;
     }
-
-
 }
+
+
