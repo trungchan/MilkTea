@@ -18,16 +18,16 @@ public class PaymentService implements IPaymentService {
     private IPaymentRepository paymentRepository;
 
     @Override
-    public Payments getPaymentById(Long id) {
+    public Payments getPaymentById(int id) {
 
-        return (Payments) paymentRepository.getById(id).orElse(null);
+        return paymentRepository.getById(id);
     }
 
     @Override
     public Payments createPayment(PaymentFormForCreatingOrUpdating paymentForm) {
         Payments payments = new Payments();
         payments.setName(paymentForm.getName());
-        payments.setAccount(paymentForm.getAccount());
+        payments.setOrders(paymentForm.getOrders());
         payments.setAddress(paymentForm.getAddress());
         payments.setPhone(paymentForm.getPhone());
         payments.setEmail(paymentForm.getEmail());
@@ -38,7 +38,7 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public boolean deletePayment(Long id) {
+    public boolean deletePayment(int id) {
         if (paymentRepository.existsById(id)) {
             paymentRepository.deleteById(id);
             return true;
@@ -67,7 +67,7 @@ public class PaymentService implements IPaymentService {
     public Payments updatePayment(PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
         Payments payments = new Payments();
         payments.setName(paymentUpdatingForm.getName());
-        payments.setAccount(paymentUpdatingForm.getAccount());
+        payments.setOrders(paymentUpdatingForm.getOrders());
         payments.setAddress(paymentUpdatingForm.getAddress());
         payments.setPhone(paymentUpdatingForm.getPhone());
         payments.setEmail(paymentUpdatingForm.getEmail());

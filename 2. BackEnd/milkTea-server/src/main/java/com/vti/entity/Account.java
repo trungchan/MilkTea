@@ -14,7 +14,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Entity
 @Table(name = "Account", catalog = "milk_tea_oder")
@@ -52,8 +52,7 @@ public class Account implements Serializable {
 
     @OneToMany(mappedBy = "account")
     private List<ProductReviews> productReviews;
-    @OneToMany(mappedBy = "account")
-    private List<Payments> payments;
+
 
 
     public enum Role {

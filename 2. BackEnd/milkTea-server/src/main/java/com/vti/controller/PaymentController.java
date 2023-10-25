@@ -14,14 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.function.Function;
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("api/v1/Payments")
+@CrossOrigin("*")
 public class PaymentController {
-    private final IPaymentService paymentService;
-
-    @Autowired
-    public PaymentController(IPaymentService paymentService) {
-        this.paymentService = paymentService;
-    }
+    private IPaymentService paymentService;
 
     @PostMapping
     public ResponseEntity<?> createPayment(@RequestBody PaymentFormForCreatingOrUpdating paymentForm) {
@@ -30,7 +26,7 @@ public class PaymentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPaymentById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getPaymentById(@PathVariable("id") int id) {
         Payments payment = paymentService.getPaymentById(id);
         if (payment != null) {
             return new ResponseEntity<>(payment, HttpStatus.OK);
@@ -41,7 +37,7 @@ public class PaymentController {
 
     // Update an existing payment
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePayment(@PathVariable("id") Long id, @RequestBody PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
+    public ResponseEntity<?> updatePayment(@PathVariable("id") int id, @RequestBody PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
         Payments payment = paymentService.getPaymentById(id);
         if (payment != null) {
             payment.setId(paymentUpdatingForm.getId()); // Set the ID of the updated payment
@@ -54,7 +50,7 @@ public class PaymentController {
 
     // Delete a payment by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletePayment(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deletePayment(@PathVariable("id") int id) {
         boolean deleted = paymentService.deletePayment(id);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -71,13 +67,17 @@ public class PaymentController {
             @Override
             public PaymentDTO apply(Payments payments) {
                 PaymentDTO paymentDTO = new PaymentDTO();
-                paymentDTO.setId((long) payments.getId());
+
+                paymentDTO.setId(payments.getId());
+                paymentDTO.setOrders(payments.getOrders().toString());
+                paymentDTO.setTotalPayment(payments.getTotalPayment().toString());
+                paymentDTO.setPaymentDate(payments.getPaymentDate().toString());
                 paymentDTO.setName(payments.getName());
-                paymentDTO.setAccount(payments.getAccount());
                 paymentDTO.setEmail(payments.getEmail());
                 paymentDTO.setPhone(payments.getPhone());
                 paymentDTO.setAddress(payments.getAddress());
-                paymentDTO.setBankNumber((long) payments.getBankNumber());
+                paymentDTO.setBankNumber(payments.getBankNumber());
+                paymentDTO.setTypePay(payments.getTypePay().toString());
                 return paymentDTO;
             }
         });

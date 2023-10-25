@@ -1,6 +1,6 @@
 package com.vti.form;
 
-import com.vti.entity.Account;
+import com.vti.entity.Orders;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,14 +14,14 @@ import java.util.Date;
 @AllArgsConstructor
 public class PaymentFormForCreatingOrUpdating {
     private int id;
-    private Account account;
+    private Orders orders;
     private Date paymentDate;
     private Double totalPayment;
     private String name;
     private String email;
     private String phone;
     private String address;
-    private int bankNumber;
+    private String bankNumber;
 
 
 }

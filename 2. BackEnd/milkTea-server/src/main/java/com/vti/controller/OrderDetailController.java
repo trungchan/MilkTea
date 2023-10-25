@@ -15,7 +15,8 @@ import java.util.function.Function;
 
 
 @RestController
-@RequestMapping("/order-details")
+@RequestMapping("api/v1/Orderdetails")
+@CrossOrigin("*")
 public class OrderDetailController {
     @Autowired
     private IOrderDetailService orderDetailService;
