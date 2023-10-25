@@ -54,7 +54,7 @@ public class Payments implements Serializable {
     private TypePay typePay = TypePay.COD;
 
     @Column(name = "bank_number")
-    private int bankNumber;
+    private String bankNumber;
 
 
     public enum TypePay{
@@ -64,7 +64,7 @@ public class Payments implements Serializable {
 
     public Payments ( Orders orders,Double totalPayment,
                       String name, String email, String phone, String address,
-                      TypePay typePay, int bankNumber ) {
+                      TypePay typePay, String bankNumber ) {
         this.orders = orders;
         this.totalPayment = totalPayment;
         this.name = name;

@@ -2,22 +2,22 @@ package com.vti.dto;
 
 import com.vti.entity.Account;
 import com.vti.entity.Orders;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.vti.entity.Payments;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor
 @Setter
 @NoArgsConstructor
+@ToString
 public class PaymentDTO {
-    private Long id;
-    private Orders orders;
+    private int id;
+    private int ordersId;
 
     private String name;
     private String email;
     private String phone;
     private String address;
-    private Long bankNumber;
+    private Payments.TypePay typePay;
+    private String bankNumber;
 }

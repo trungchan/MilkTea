@@ -1,9 +1,12 @@
 package com.vti.controller;
 
 import com.vti.dto.PaymentDTO;
+import com.vti.entity.Orders;
 import com.vti.entity.Payments;
 import com.vti.form.PaymentFormForCreatingOrUpdating;
+import com.vti.repository.IPaymentRepository;
 import com.vti.service.IPaymentService;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -71,13 +74,14 @@ public class PaymentController {
             @Override
             public PaymentDTO apply(Payments payments) {
                 PaymentDTO paymentDTO = new PaymentDTO();
-                paymentDTO.setId((long) payments.getId());
+                paymentDTO.setId( payments.getId());
                 paymentDTO.setName(payments.getName());
-                paymentDTO.setOrders(payments.getOrders());
+                paymentDTO.setOrdersId(payments.getOrders().getId());
                 paymentDTO.setEmail(payments.getEmail());
                 paymentDTO.setPhone(payments.getPhone());
                 paymentDTO.setAddress(payments.getAddress());
-                paymentDTO.setBankNumber((long) payments.getBankNumber());
+                paymentDTO.setTypePay(payments.getTypePay());
+                paymentDTO.setBankNumber (payments.getBankNumber());
                 return paymentDTO;
             }
         });

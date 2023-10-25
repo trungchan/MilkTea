@@ -2,13 +2,11 @@ package com.vti.form;
 
 import com.vti.entity.Account;
 import com.vti.entity.Orders;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
+@Data
 @Setter
 @Getter
 @NoArgsConstructor
@@ -22,7 +20,7 @@ public class PaymentFormForCreatingOrUpdating {
     private String email;
     private String phone;
     private String address;
-    private int bankNumber;
+    private String bankNumber;
 
 
 }
