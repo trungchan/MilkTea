@@ -2,16 +2,15 @@ package com.vti.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.vti.entity.Account;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductReviewsDTO {
     private int id;
@@ -21,5 +20,6 @@ public class ProductReviewsDTO {
     private String reviewText;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date reviewDate;
+
 
 }
