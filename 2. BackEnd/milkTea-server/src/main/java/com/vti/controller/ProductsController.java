@@ -1,5 +1,8 @@
 package com.vti.controller;
 
+import com.vti.dto.ProductReviewsDTO;
+import com.vti.entity.Categories;
+import com.vti.entity.ProductReviews;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.vti.dto.ProductsDto;
@@ -31,6 +34,19 @@ public class ProductsController {
         Page<ProductsDto> dtoPage  = entities.map(new Function<Products, ProductsDto>(){
             @Override
             public ProductsDto apply(Products products) {
+                List<ProductReviews> productReviewsList = products.getProductReviews();
+                List<ProductReviewsDTO> productReviewsDTOS = new ArrayList<>();
+                productReviewsList.forEach(productReviews -> {
+                    productReviewsDTOS.add(new ProductReviewsDTO(
+                            productReviews.getId(),
+                            null,
+                            null,
+                            productReviews.getRatting(),
+                            productReviews.getReviewText(),
+                            productReviews.getReviewDate()
+                    ));
+                });
+
                 ProductsDto dto = new ProductsDto(
                         products.getId(),
                         products.getProductName(),
@@ -39,6 +55,7 @@ public class ProductsController {
                         products.getPriceL(),
                         products.getImageUrl(),
                         products.getCategories().getName().toString(),
+                        productReviewsDTOS,
                         products.getCreateDate());
                 return dto;
             }
@@ -58,6 +75,7 @@ public class ProductsController {
                 products.getPriceL(),
                 products.getImageUrl(),
                 products.getCategories().getName().toString(),
+                null,
                 products.getCreateDate());
 
         return new ResponseEntity<ProductsDto>(productsDto, HttpStatus.OK);

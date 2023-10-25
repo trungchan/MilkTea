@@ -2,7 +2,9 @@ package com.vti.controller;
 
 
 import com.vti.dto.CategoriesDto;
+import com.vti.dto.ProductsDto;
 import com.vti.entity.Categories;
+import com.vti.entity.Products;
 import com.vti.form.CategoriesFormForCreatingOrUpdating;
 import com.vti.service.ICategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Pageable;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 @RestController
@@ -22,14 +27,34 @@ public class CategoriesController {
     @Autowired
     private ICategoriesService categoriesService;
 
+
     @GetMapping()
     public ResponseEntity<?> getAllCategories(Pageable pageable, @RequestParam(required = false) String search) {
         Page<Categories> entities = categoriesService.getAllCategories(pageable, search);
 
-        Page<CategoriesDto> dtoPage= entities.map(new Function<Categories, CategoriesDto>() {
+
+//        entities.get().forEach(categories -> productsDtoList.add(categories.getProducts().));
+        Page<CategoriesDto> dtoPage = entities.map(new Function<Categories, CategoriesDto>() {
             @Override
             public CategoriesDto apply(Categories categories) {
-                CategoriesDto dto = new CategoriesDto(categories.getId(), categories.getName().toString());
+                List<Products> productsList = categories.getProducts();
+                List<ProductsDto> productsDtoList = new ArrayList<>();
+                productsList.forEach(products -> {
+                    productsDtoList.add(new ProductsDto(
+                            products.getId(),
+                            products.getProductName(),
+                            products.getDescription(),
+                            products.getPriceM(),
+                            products.getPriceL(),
+                            products.getImageUrl(),
+                            null,
+                            null,
+                            products.getCreateDate()
+
+                    ));
+                });
+
+                CategoriesDto dto = new CategoriesDto(categories.getId(), categories.getName().toString(), productsDtoList);
 
                 return dto;
             }
@@ -41,7 +66,9 @@ public class CategoriesController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getCategoriesById(@PathVariable(name = "id") int id) {
         Categories categories = categoriesService.getCategoriesById(id);
-        CategoriesDto categoriesDto = new CategoriesDto(categories.getId(), categories.getName());
+        List<Products> productsList = categories.getProducts();
+        List<ProductsDto> productsDtoList = new ArrayList<>();
+        CategoriesDto categoriesDto = new CategoriesDto(categories.getId(), categories.getName(), productsDtoList);
 
         return new ResponseEntity<CategoriesDto>(categoriesDto, HttpStatus.OK);
     }
