@@ -14,9 +14,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrderDetailDTO {
     private Long id;
-    private String orders;
-    private String products;
+    private int ordersId;
+    private String name;
     private int quantity;
-    private String size;
+    private OrderDetails.Size size;
     private Double unitPrice;
 }

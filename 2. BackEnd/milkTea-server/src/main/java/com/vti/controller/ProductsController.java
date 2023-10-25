@@ -39,9 +39,9 @@ public class ProductsController {
                 productReviewsList.forEach(productReviews -> {
                     productReviewsDTOS.add(new ProductReviewsDTO(
                             productReviews.getId(),
-                            null,
-                            null,
-                            productReviews.getRatting(),
+                            productReviews.getAccount().getId(),
+                            productReviews.getProducts().getProductName(),
+                            productReviews.getRating(),
                             productReviews.getReviewText(),
                             productReviews.getReviewDate()
                     ));
@@ -91,7 +91,7 @@ public class ProductsController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<?> updateProducts(@PathVariable(name = "id") int id,
-                                              @RequestBody ProductsFormForCreatingOrUpdating form) {
+                                            @RequestBody ProductsFormForCreatingOrUpdating form) {
         productsService.updateProducts(id, form);
         return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);
     }
