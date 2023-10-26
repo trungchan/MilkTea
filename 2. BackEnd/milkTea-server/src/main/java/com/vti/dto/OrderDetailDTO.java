@@ -10,8 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetailDTO {
-    private Long id;
-    private int orders;
+    private int id;
+    private int ordersId;
     private String productsName;
     private int quantity;
     private String size;

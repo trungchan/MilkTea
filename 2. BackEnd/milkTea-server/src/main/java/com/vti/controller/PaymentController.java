@@ -27,11 +27,22 @@ public class PaymentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getPaymentById(@PathVariable("id") int id) {
-        Payments payment = paymentService.getPaymentById(id);
-        if (payment != null) {
-            return new ResponseEntity<>(payment, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        try {
+            Payments payments = paymentService.getPaymentById(id);
+            // chuyển đổi dữ liệu
+            PaymentDTO paymentDTO = new PaymentDTO();
+            paymentDTO.setId(payments.getId());
+            paymentDTO.setName(payments.getName());
+            paymentDTO.setOrdersId(payments.getOrders().getId());
+            paymentDTO.setEmail(payments.getEmail());
+            paymentDTO.setPhone(payments.getPhone());
+            paymentDTO.setAddress(payments.getAddress());
+            paymentDTO.setBankNumber(payments.getBankNumber());
+            paymentDTO.setTypePay(payments.getTypePay());
+            return new ResponseEntity<>(paymentDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -44,7 +55,7 @@ public class PaymentController {
             Payments updated = paymentService.updatePayment(paymentUpdatingForm);
             return new ResponseEntity<>(updated, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found",HttpStatus.NOT_FOUND);
         }
     }
 
@@ -55,7 +66,7 @@ public class PaymentController {
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found",HttpStatus.NOT_FOUND);
         }
     }
 
@@ -67,7 +78,6 @@ public class PaymentController {
             @Override
             public PaymentDTO apply(Payments payments) {
                 PaymentDTO paymentDTO = new PaymentDTO();
-
                 paymentDTO.setId(payments.getId());
                 paymentDTO.setOrdersId(payments.getOrders().getId());
                 paymentDTO.setName(payments.getName());

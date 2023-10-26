@@ -13,16 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetailsFormForCreatingOrUpdating {
-    private Long id;
-    private Orders orders;
-
-    private int accountId;
-    private Products product;
-
+    private int id;
+    private int ordersId;
+    private int size;
+    private String productName;
     private int quantity;
-
     private Double unitPrice;
-
-
-
 }

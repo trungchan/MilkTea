@@ -1,8 +1,10 @@
 package com.vti.service;
 
 import com.vti.entity.OrderDetails;
+import com.vti.entity.Orders;
 import com.vti.form.OrderDetailsFormForCreatingOrUpdating;
 import com.vti.repository.IOrderDetailRepository;
+import com.vti.repository.IOrderRepository;
 import com.vti.specification.OderDetailSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,26 +16,34 @@ import org.springframework.util.StringUtils;
 public class OrderDetailService implements IOrderDetailService{
     @Autowired
     private IOrderDetailRepository orderDetailRepository;
+    @Autowired
+    private IOrderRepository orderRepository;
+
+//    @Autowired
+//    private IProductRepository IProductRepository;
+
     @Override
-    public OrderDetails createOrderDetail(OrderDetailsFormForCreatingOrUpdating orderDetail) {
+    public OrderDetails createOrderDetail(OrderDetailsFormForCreatingOrUpdating createOrderDetail) {
+        Orders orders = orderRepository.getById(createOrderDetail.getOrdersId());
         OrderDetails orderDetails = new OrderDetails();
-        orderDetails.setOrders(orderDetail.getOrders());
-        orderDetails.setProducts(orderDetail.getProduct());
-        orderDetails.setQuantity(orderDetail.getQuantity());
-        orderDetails.setUnitPrice(orderDetail.getUnitPrice());
+        orderDetails.setOrders(orders);
+//        orderDetails.setProducts(orderDetail.getProductName());
+        orderDetails.setQuantity(createOrderDetail.getQuantity());
+        orderDetails.setUnitPrice(createOrderDetail.getUnitPrice());
         return orderDetailRepository.save(orderDetails);
     }
 
     @Override
-    public OrderDetails getOrderDetailById(Long id) {
-        return orderDetailRepository.getById(Math.toIntExact(id));
+    public OrderDetails getOrderDetailById(int id) {
+        return orderDetailRepository.getById(id);
     }
 
     @Override
     public OrderDetails updateOrderDetail(OrderDetailsFormForCreatingOrUpdating updatedOrderDetail) {
+        Orders orders = orderRepository.getById(updatedOrderDetail.getOrdersId());
         OrderDetails orderDetails = new OrderDetails();
-        orderDetails.setOrders(updatedOrderDetail.getOrders());
-        orderDetails.setProducts(updatedOrderDetail.getProduct());
+        orderDetails.setId(updatedOrderDetail.getId());
+        orderDetails.setOrders(orders);
         orderDetails.setQuantity(updatedOrderDetail.getQuantity());
         orderDetails.setUnitPrice(updatedOrderDetail.getUnitPrice());
         return orderDetailRepository.save(orderDetails);
@@ -55,7 +65,7 @@ public class OrderDetailService implements IOrderDetailService{
     }
 
     @Override
-    public boolean deleteOrderDetail(Long id) {
+    public boolean deleteOrderDetail(int id) {
         if (orderDetailRepository.existsById(id)) {
             orderDetailRepository.deleteById(id);
             return true;
