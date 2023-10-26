@@ -1,7 +1,9 @@
 package com.vti.service;
 
+import com.vti.entity.Orders;
 import com.vti.entity.Payments;
 import com.vti.form.PaymentFormForCreatingOrUpdating;
+import com.vti.repository.IOrderRepository;
 import com.vti.repository.IPaymentRepository;
 import com.vti.specification.PaymentsSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,29 +18,32 @@ import org.springframework.util.StringUtils;
 public class PaymentService implements IPaymentService {
     @Autowired
     private IPaymentRepository paymentRepository;
+    @Autowired
+    private IOrderRepository orderRepository;
 
     @Override
-    public Payments getPaymentById(Long id) {
+    public Payments getPaymentById(int id) {
 
-        return (Payments) paymentRepository.getById(id).orElse(null);
+        return paymentRepository.getById(id);
     }
 
     @Override
-    public Payments createPayment(PaymentFormForCreatingOrUpdating paymentForm) {
+    public Payments createPayment(PaymentFormForCreatingOrUpdating createPaymentForm) {
+        Orders orders = orderRepository.getById(createPaymentForm.getOrderId());
         Payments payments = new Payments();
-        payments.setName(paymentForm.getName());
-        payments.setOrders(paymentForm.getOrders());
-        payments.setAddress(paymentForm.getAddress());
-        payments.setPhone(paymentForm.getPhone());
-        payments.setEmail(paymentForm.getEmail());
-        payments.setPaymentDate(paymentForm.getPaymentDate());
-        payments.setBankNumber(paymentForm.getBankNumber());
-        payments.setTotalPayment(paymentForm.getTotalPayment());
+        payments.setName(createPaymentForm.getName());
+        payments.setOrders(orders);
+        payments.setAddress(createPaymentForm.getAddress());
+        payments.setPhone(createPaymentForm.getPhone());
+        payments.setEmail(createPaymentForm.getEmail());
+        payments.setPaymentDate(createPaymentForm.getPaymentDate());
+        payments.setBankNumber(createPaymentForm.getBankNumber());
+        payments.setTotalPayment(createPaymentForm.getTotalPayment());
         return paymentRepository.save(payments);
     }
 
     @Override
-    public boolean deletePayment(Long id) {
+    public boolean deletePayment(int id) {
         if (paymentRepository.existsById(id)) {
             paymentRepository.deleteById(id);
             return true;
@@ -65,9 +70,10 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public Payments updatePayment(PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
+        Orders orders = orderRepository.getById(paymentUpdatingForm.getOrderId());
         Payments payments = new Payments();
         payments.setName(paymentUpdatingForm.getName());
-        payments.setOrders(paymentUpdatingForm.getOrders());
+        payments.setOrders(orders);
         payments.setAddress(paymentUpdatingForm.getAddress());
         payments.setPhone(paymentUpdatingForm.getPhone());
         payments.setEmail(paymentUpdatingForm.getEmail());

@@ -20,7 +20,7 @@ public class OrderDetails implements Serializable {
     @Column(name = "order_details_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)

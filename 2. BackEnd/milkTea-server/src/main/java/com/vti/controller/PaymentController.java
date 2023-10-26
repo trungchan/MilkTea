@@ -1,12 +1,9 @@
 package com.vti.controller;
 
 import com.vti.dto.PaymentDTO;
-import com.vti.entity.Orders;
 import com.vti.entity.Payments;
 import com.vti.form.PaymentFormForCreatingOrUpdating;
-import com.vti.repository.IPaymentRepository;
 import com.vti.service.IPaymentService;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,14 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.function.Function;
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("api/v1/Payments")
 public class PaymentController {
-    private final IPaymentService paymentService;
-
     @Autowired
-    public PaymentController(IPaymentService paymentService) {
-        this.paymentService = paymentService;
-    }
+    private IPaymentService paymentService;
 
     @PostMapping
     public ResponseEntity<?> createPayment(@RequestBody PaymentFormForCreatingOrUpdating paymentForm) {
@@ -33,36 +26,47 @@ public class PaymentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPaymentById(@PathVariable("id") Long id) {
-        Payments payment = paymentService.getPaymentById(id);
-        if (payment != null) {
-            return new ResponseEntity<>(payment, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> getPaymentById(@PathVariable("id") int id) {
+        try {
+            Payments payments = paymentService.getPaymentById(id);
+            // chuyển đổi dữ liệu
+            PaymentDTO paymentDTO = new PaymentDTO();
+            paymentDTO.setId(payments.getId());
+            paymentDTO.setName(payments.getName());
+            paymentDTO.setOrdersId(payments.getOrders().getId());
+            paymentDTO.setEmail(payments.getEmail());
+            paymentDTO.setPhone(payments.getPhone());
+            paymentDTO.setAddress(payments.getAddress());
+            paymentDTO.setBankNumber(payments.getBankNumber());
+            paymentDTO.setTypePay(payments.getTypePay());
+            return new ResponseEntity<>(paymentDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
     }
 
     // Update an existing payment
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePayment(@PathVariable("id") Long id, @RequestBody PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
+    public ResponseEntity<?> updatePayment(@PathVariable("id") int id, @RequestBody PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
         Payments payment = paymentService.getPaymentById(id);
         if (payment != null) {
             payment.setId(paymentUpdatingForm.getId()); // Set the ID of the updated payment
             Payments updated = paymentService.updatePayment(paymentUpdatingForm);
             return new ResponseEntity<>(updated, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found",HttpStatus.NOT_FOUND);
         }
     }
 
     // Delete a payment by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletePayment(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deletePayment(@PathVariable("id") int id) {
         boolean deleted = paymentService.deletePayment(id);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found",HttpStatus.NOT_FOUND);
         }
     }
 
@@ -74,14 +78,14 @@ public class PaymentController {
             @Override
             public PaymentDTO apply(Payments payments) {
                 PaymentDTO paymentDTO = new PaymentDTO();
-                paymentDTO.setId( payments.getId());
-                paymentDTO.setName(payments.getName());
+                paymentDTO.setId(payments.getId());
                 paymentDTO.setOrdersId(payments.getOrders().getId());
+                paymentDTO.setName(payments.getName());
                 paymentDTO.setEmail(payments.getEmail());
                 paymentDTO.setPhone(payments.getPhone());
                 paymentDTO.setAddress(payments.getAddress());
+                paymentDTO.setBankNumber(payments.getBankNumber());
                 paymentDTO.setTypePay(payments.getTypePay());
-                paymentDTO.setBankNumber (payments.getBankNumber());
                 return paymentDTO;
             }
         });

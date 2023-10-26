@@ -66,9 +66,9 @@ public class OrderDetailController {
             public OrderDetailDTO apply(OrderDetails orderDetails) {
                 OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
                 orderDetailDTO.setId(orderDetails.getId());
-                orderDetailDTO.setOrdersId(orderDetails.getOrders().getId());
-                orderDetailDTO.setName(orderDetailDTO.getName());
-                orderDetailDTO.setSize(orderDetails.getSize());
+                orderDetailDTO.setOrders(orderDetails.getOrders().toString());
+                orderDetailDTO.setProducts(orderDetailDTO.getProducts());
+                orderDetailDTO.setSize(orderDetails.getSize().toString());
                 orderDetailDTO.setQuantity(orderDetails.getQuantity());
                 orderDetailDTO.setUnitPrice(orderDetails.getUnitPrice());
                 return orderDetailDTO;
