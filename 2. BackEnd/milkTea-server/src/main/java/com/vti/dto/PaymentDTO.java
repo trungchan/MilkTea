@@ -5,13 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.*;
 
-import java.util.Date;
 
 @Getter
 @AllArgsConstructor
 @Setter
 @NoArgsConstructor
+@ToString
 public class PaymentDTO {
     private int id;
     private int ordersId;
@@ -21,4 +22,5 @@ public class PaymentDTO {
     private String address;
     private String bankNumber;
     private Payments.TypePay typePay;
+
 }

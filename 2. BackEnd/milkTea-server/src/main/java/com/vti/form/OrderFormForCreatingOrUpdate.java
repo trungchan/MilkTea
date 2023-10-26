@@ -6,6 +6,7 @@ import com.vti.entity.Orders;
 import com.vti.entity.Products;
 import lombok.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Getter
@@ -17,6 +18,9 @@ public class OrderFormForCreatingOrUpdate {
     private int accountId;
     private Date orderDate;
 
+    // list order detail
+//    List<OrderDetailForm> orderDetailForms;
+
 
     public Orders toOrder( Account account){
         Orders order = new Orders(account,orderDate);
@@ -24,4 +28,11 @@ public class OrderFormForCreatingOrUpdate {
         return order;
 
     }
+
+//    public class OrderDetailForm{
+//        private int productId;
+//        private int quantity;
+//        private int price;
+//
+//    }
 }

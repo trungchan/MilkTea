@@ -2,9 +2,11 @@ package com.vti.service;
 
 import com.vti.entity.Account;
 import com.vti.entity.Orders;
+import com.vti.entity.Payments;
 import com.vti.form.OrderFilterForm;
 import com.vti.form.OrderFormForCreatingOrUpdate;
 import com.vti.repository.IAccountRepository;
+import com.vti.repository.IOrderDetailRepository;
 import com.vti.repository.IOrderRepository;
 import com.vti.specification.OrdersSpectification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ import java.util.List;
 public class OrderService implements IOrderService {
     @Autowired
     private IOrderRepository orderRepository;
+
+    @Autowired
+    private IOrderDetailRepository orderDetailRepository;
 
     @Autowired
     private IAccountRepository accountRepository;
@@ -40,7 +45,20 @@ public class OrderService implements IOrderService {
     @Override
     public Orders createOrUpdateOrder ( OrderFormForCreatingOrUpdate form ) {
        Account account = accountRepository.findById(form.getAccountId()).get();
-       return orderRepository.save(form.toOrder(account));
+        Orders orders = orderRepository.save(form.toOrder(account));// insert order
+//        form.getOrderDetailForms()
+        //luu order_detail(don hang do mua nhung sp nao)
+//        for ls detail
+//                detail.setOrder(orders)
+//        orderDetailRe
+//        pository.saveAll(ls)// insert order detail
+        //luu paytment
+//        Payments payments = new Payments();
+//        payments.setAccount();
+        //insertt payment
+
+
+        return  null;
     }
 
     @Override

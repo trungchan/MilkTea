@@ -1,9 +1,7 @@
 package com.vti.controller;
 
 import com.vti.dto.OrderDetailDTO;
-import com.vti.dto.PaymentDTO;
 import com.vti.entity.OrderDetails;
-import com.vti.entity.Payments;
 import com.vti.form.OrderDetailsFormForCreatingOrUpdating;
 import com.vti.service.IOrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +35,7 @@ public class OrderDetailController {
             orderDetailDTO.setId(orderDetails.getId());
             orderDetailDTO.setOrdersId(orderDetails.getOrders().getId());
             orderDetailDTO.setProductsName(orderDetails.getProducts().getProductName());
-            orderDetailDTO.setSize(orderDetails.getSize().toString());
+            orderDetailDTO.setSize(orderDetails.getSize());
             orderDetailDTO.setQuantity(orderDetails.getQuantity());
             orderDetailDTO.setUnitPrice(orderDetails.getUnitPrice());
             return new ResponseEntity<>(orderDetailDTO, HttpStatus.OK);
@@ -79,7 +77,8 @@ public class OrderDetailController {
                 orderDetailDTO.setId(orderDetails.getId());
                 orderDetailDTO.setOrdersId(orderDetails.getOrders().getId());
                 orderDetailDTO.setProductsName(orderDetails.getProducts().getProductName());
-                orderDetailDTO.setSize(orderDetails.getSize().toString());
+                orderDetailDTO.setSize(orderDetails.getSize());
+                orderDetailDTO.setName(orderDetailDTO.getName());
                 orderDetailDTO.setQuantity(orderDetails.getQuantity());
                 orderDetailDTO.setUnitPrice(orderDetails.getUnitPrice());
                 return orderDetailDTO;

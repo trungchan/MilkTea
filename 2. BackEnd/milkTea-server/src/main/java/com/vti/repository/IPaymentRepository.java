@@ -8,9 +8,8 @@ import java.util.Optional;
 
 public interface IPaymentRepository extends JpaRepository<Payments, Integer>, JpaSpecificationExecutor<Payments> {
 
-    boolean existsById(Long id);
+    boolean existsById(int id);
 
-    void deleteById(Long id);
+    void deleteById(int id);
 
-    Optional<Object> getById(Long id);
 }

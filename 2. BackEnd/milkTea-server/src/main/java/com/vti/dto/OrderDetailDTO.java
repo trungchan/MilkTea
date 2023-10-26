@@ -1,8 +1,6 @@
 package com.vti.dto;
 
-import com.vti.entity.Account;
-import com.vti.entity.Orders;
-import com.vti.entity.Products;
+import com.vti.entity.OrderDetails;
 import lombok.*;
 
 @Getter
@@ -13,8 +11,9 @@ public class OrderDetailDTO {
     private int id;
     private int ordersId;
     private String productsName;
+    private String name;
     private int quantity;
-    private String size;
+    private OrderDetails.Size size;
     private Double unitPrice;
 
 }

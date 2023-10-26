@@ -54,7 +54,6 @@ public class Account implements Serializable {
     private List<ProductReviews> productReviews;
 
 
-
     public enum Role {
         ADMIN, USER
     }
