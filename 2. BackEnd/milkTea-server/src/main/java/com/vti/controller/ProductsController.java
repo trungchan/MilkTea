@@ -1,13 +1,13 @@
 package com.vti.controller;
 
+import com.vti.dto.OrderDetailDTO;
 import com.vti.dto.ProductReviewsDTO;
-import com.vti.entity.Categories;
+import com.vti.entity.OrderDetails;
 import com.vti.entity.ProductReviews;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.vti.dto.ProductsDto;
 import com.vti.entity.Products;
-import com.vti.form.CategoriesFormForCreatingOrUpdating;
 import com.vti.form.ProductsFormForCreatingOrUpdating;
 import com.vti.service.IProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,20 @@ public class ProductsController {
         Page<ProductsDto> dtoPage  = entities.map(new Function<Products, ProductsDto>(){
             @Override
             public ProductsDto apply(Products products) {
+
+                List<OrderDetails> orderDetailsList = products.getOrderDetails();
+                List<OrderDetailDTO> orderDetailDTOS = new ArrayList<>();
+                orderDetailsList.forEach(orderDetails -> {
+                    orderDetailDTOS.add(new OrderDetailDTO (
+                            orderDetails.getId().longValue(),
+                            orderDetails.getOrders().getId(),
+                            orderDetails.getProducts().getProductName(),
+                            orderDetails.getQuantity(),
+                            orderDetails.getSize(),
+                            orderDetails.getUnitPrice()
+                    ));
+                });
+
                 List<ProductReviews> productReviewsList = products.getProductReviews();
                 List<ProductReviewsDTO> productReviewsDTOS = new ArrayList<>();
                 productReviewsList.forEach(productReviews -> {
@@ -55,8 +69,9 @@ public class ProductsController {
                         products.getPriceL(),
                         products.getImageUrl(),
                         products.getCategories().getName().toString(),
-                        productReviewsDTOS,
-                        products.getCreateDate());
+                        products.getCreateDate(),
+                        orderDetailDTOS,
+                        productReviewsDTOS);
                 return dto;
             }
         });
@@ -75,8 +90,10 @@ public class ProductsController {
                 products.getPriceL(),
                 products.getImageUrl(),
                 products.getCategories().getName().toString(),
+                products.getCreateDate(),
                 null,
-                products.getCreateDate());
+                null
+                );
 
         return new ResponseEntity<ProductsDto>(productsDto, HttpStatus.OK);
     }

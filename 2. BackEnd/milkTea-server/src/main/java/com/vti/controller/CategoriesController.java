@@ -48,8 +48,9 @@ public class CategoriesController {
                             products.getPriceL(),
                             products.getImageUrl(),
                             null,
+                            products.getCreateDate(),
                             null,
-                            products.getCreateDate()
+                            null
 
                     ));
                 });

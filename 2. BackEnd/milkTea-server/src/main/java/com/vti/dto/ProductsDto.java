@@ -21,12 +21,15 @@ public class ProductsDto {
     private Double priceL;
     private String imageUrl;
     private String categories;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date createDate;
+
+    private List<OrderDetailDTO> orderDetailDTOS;
     private List<ProductReviewsDTO> productReviewsDTOS;
 
 
 
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date createDate;
 
 
 }
