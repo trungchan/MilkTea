@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class PaymentFormForCreatingOrUpdating {
     private int id;
-    private Orders orders;
+    private int orderId;
     private Date paymentDate;
     private Double totalPayment;
     private String name;

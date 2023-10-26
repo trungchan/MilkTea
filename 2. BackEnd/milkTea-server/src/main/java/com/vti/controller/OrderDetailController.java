@@ -16,7 +16,6 @@ import java.util.function.Function;
 
 @RestController
 @RequestMapping("api/v1/Orderdetails")
-@CrossOrigin("*")
 public class OrderDetailController {
     @Autowired
     private IOrderDetailService orderDetailService;
@@ -67,8 +66,8 @@ public class OrderDetailController {
             public OrderDetailDTO apply(OrderDetails orderDetails) {
                 OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
                 orderDetailDTO.setId(orderDetails.getId());
-                orderDetailDTO.setOrders(orderDetails.getOrders().toString());
-                orderDetailDTO.setProducts(orderDetailDTO.getProducts());
+                orderDetailDTO.setOrders(orderDetails.getOrders().getId());
+                orderDetailDTO.setProductsName(orderDetails.getProducts().getProductName());
                 orderDetailDTO.setSize(orderDetails.getSize().toString());
                 orderDetailDTO.setQuantity(orderDetails.getQuantity());
                 orderDetailDTO.setUnitPrice(orderDetails.getUnitPrice());

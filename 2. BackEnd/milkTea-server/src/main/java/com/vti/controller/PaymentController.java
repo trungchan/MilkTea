@@ -15,8 +15,8 @@ import java.util.function.Function;
 
 @RestController
 @RequestMapping("api/v1/Payments")
-@CrossOrigin("*")
 public class PaymentController {
+    @Autowired
     private IPaymentService paymentService;
 
     @PostMapping
@@ -69,15 +69,13 @@ public class PaymentController {
                 PaymentDTO paymentDTO = new PaymentDTO();
 
                 paymentDTO.setId(payments.getId());
-                paymentDTO.setOrders(payments.getOrders().toString());
-                paymentDTO.setTotalPayment(payments.getTotalPayment().toString());
-                paymentDTO.setPaymentDate(payments.getPaymentDate().toString());
+                paymentDTO.setOrdersId(payments.getOrders().getId());
                 paymentDTO.setName(payments.getName());
                 paymentDTO.setEmail(payments.getEmail());
                 paymentDTO.setPhone(payments.getPhone());
                 paymentDTO.setAddress(payments.getAddress());
                 paymentDTO.setBankNumber(payments.getBankNumber());
-                paymentDTO.setTypePay(payments.getTypePay().toString());
+                paymentDTO.setTypePay(payments.getTypePay());
                 return paymentDTO;
             }
         });
