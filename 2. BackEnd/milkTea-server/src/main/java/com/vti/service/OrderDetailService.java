@@ -2,9 +2,11 @@ package com.vti.service;
 
 import com.vti.entity.OrderDetails;
 import com.vti.entity.Orders;
+import com.vti.entity.Products;
 import com.vti.form.OrderDetailsFormForCreatingOrUpdating;
 import com.vti.repository.IOrderDetailRepository;
 import com.vti.repository.IOrderRepository;
+import com.vti.repository.IProductsRepository;
 import com.vti.specification.OderDetailSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,15 +21,17 @@ public class OrderDetailService implements IOrderDetailService{
     @Autowired
     private IOrderRepository orderRepository;
 
-//    @Autowired
-//    private IProductRepository IProductRepository;
+    @Autowired
+    private IProductsRepository productsRepository;
 
     @Override
     public OrderDetails createOrderDetail(OrderDetailsFormForCreatingOrUpdating createOrderDetail) {
         Orders orders = orderRepository.getById(createOrderDetail.getOrdersId());
+        Products products = productsRepository.getById(createOrderDetail.getProductId());
         OrderDetails orderDetails = new OrderDetails();
         orderDetails.setOrders(orders);
-//        orderDetails.setProducts(orderDetail.getProductName());
+        orderDetails.setProducts(products);
+        orderDetails.setSize(OrderDetails.Size.valueOf(createOrderDetail.getSize().toString()));
         orderDetails.setQuantity(createOrderDetail.getQuantity());
         orderDetails.setUnitPrice(createOrderDetail.getUnitPrice());
         return orderDetailRepository.save(orderDetails);
@@ -41,9 +45,12 @@ public class OrderDetailService implements IOrderDetailService{
     @Override
     public OrderDetails updateOrderDetail(OrderDetailsFormForCreatingOrUpdating updatedOrderDetail) {
         Orders orders = orderRepository.getById(updatedOrderDetail.getOrdersId());
+        Products products = productsRepository.getById(updatedOrderDetail.getProductId());
         OrderDetails orderDetails = new OrderDetails();
         orderDetails.setId(updatedOrderDetail.getId());
         orderDetails.setOrders(orders);
+        orderDetails.setProducts(products);
+        orderDetails.setSize(OrderDetails.Size.valueOf(updatedOrderDetail.getSize().toString()));
         orderDetails.setQuantity(updatedOrderDetail.getQuantity());
         orderDetails.setUnitPrice(updatedOrderDetail.getUnitPrice());
         return orderDetailRepository.save(orderDetails);

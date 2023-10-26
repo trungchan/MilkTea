@@ -5,6 +5,7 @@ import com.vti.entity.Payments;
 import com.vti.form.PaymentFormForCreatingOrUpdating;
 import com.vti.repository.IOrderRepository;
 import com.vti.repository.IPaymentRepository;
+import com.vti.repository.IProductsRepository;
 import com.vti.specification.PaymentsSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,8 @@ public class PaymentService implements IPaymentService {
     private IPaymentRepository paymentRepository;
     @Autowired
     private IOrderRepository orderRepository;
+
+
 
     @Override
     public Payments getPaymentById(int id) {
