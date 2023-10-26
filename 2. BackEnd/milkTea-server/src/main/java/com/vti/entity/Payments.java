@@ -1,5 +1,6 @@
 package com.vti.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,10 +9,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -25,7 +24,7 @@ public class Payments implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Orders orders;
@@ -57,11 +56,36 @@ public class Payments implements Serializable {
     private String bankNumber;
 
 
-    public enum TypePay{
+    public enum TypePay {
         COD, BANKING
     }
 
 
+//    public Payments ( Orders orders,Double totalPayment,
+//                      String name, String email, String phone, String address,
+//                      TypePay typePay, String bankNumber ) {
+//        this.orders = orders;
+//        this.totalPayment = totalPayment;
+//        this.name = name;
+//        this.email = email;
+//        this.phone = phone;
+//        this.address = address;
+//        this.typePay = typePay;
+//        this.bankNumber = bankNumber;
+//    }
+
+//    @PersistenceContext
+//    private EntityManager entityManager;
+//
+//    @Transactional
+//    public List<OrderDetails> getOrderDetailByAccountId() {
+//        int accountId = this.getAccount().getId();
+//        String jpql = "SELECT od FROM OrderDetails od WHERE od.orders.account.id = :accountId AND od.orders.orderDate = CURRENT_DATE";
+//        return entityManager.createQuery(jpql, OrderDetails.class)
+//                .setParameter("accountId", accountId)
+//                .getResultList();
+//
+//    }
     public Payments ( Orders orders,Double totalPayment,
                       String name, String email, String phone, String address,
                       TypePay typePay, String bankNumber ) {

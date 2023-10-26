@@ -1,9 +1,12 @@
 package com.vti.dto;
 
-import com.vti.entity.Account;
-import com.vti.entity.Orders;
 import com.vti.entity.Payments;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.*;
+
 
 @Getter
 @AllArgsConstructor
@@ -13,11 +16,11 @@ import lombok.*;
 public class PaymentDTO {
     private int id;
     private int ordersId;
-
     private String name;
     private String email;
     private String phone;
     private String address;
-    private Payments.TypePay typePay;
     private String bankNumber;
+    private Payments.TypePay typePay;
+
 }

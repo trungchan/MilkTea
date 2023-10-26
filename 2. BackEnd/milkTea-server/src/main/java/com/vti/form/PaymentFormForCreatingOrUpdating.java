@@ -1,7 +1,10 @@
 package com.vti.form;
 
-import com.vti.entity.Account;
 import com.vti.entity.Orders;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.*;
 
 import java.util.Date;
@@ -13,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class PaymentFormForCreatingOrUpdating {
     private int id;
-    private Orders orders;
+    private int orderId;
     private Date paymentDate;
     private Double totalPayment;
     private String name;

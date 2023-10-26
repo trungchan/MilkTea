@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface IPaymentService {
 
-    Payments getPaymentById(Long id);
+    Payments getPaymentById(int id);
 
     Payments createPayment(PaymentFormForCreatingOrUpdating paymentForm);
 
-    boolean deletePayment(Long id);
+    boolean deletePayment(int id);
 
     Page<Payments> getAllPayments(Pageable pageable, String search);
 
