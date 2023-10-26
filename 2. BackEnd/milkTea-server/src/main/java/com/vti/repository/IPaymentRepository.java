@@ -11,5 +11,6 @@ public interface IPaymentRepository extends JpaRepository<Payments, Integer>, Jp
     boolean existsById(int id);
 
     void deleteById(int id);
+    void deleteByOrdersId(Integer id);
 
 }

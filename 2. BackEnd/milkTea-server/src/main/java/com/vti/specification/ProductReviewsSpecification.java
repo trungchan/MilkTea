@@ -19,17 +19,19 @@ public class ProductReviewsSpecification {
             where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
         }
         if (form.getMaxRating() != 0){
-            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
+            where.and(hasRattingLessThanOrEqualTo(form.getMaxRating()));
         }
         if (form.getMaxReviewDate() != null){
-            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
+            where.and(hasReviewDateGreaterThanOrEqualTo(form.getMinReviewDate()));
         }
         if (Objects.nonNull(form.getMinReviewDate())){
-            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
+            where.and(hasReviewDateLessThanOrEqualTo(form.getMaxReviewDate()));
         }
         return  where;
+//        return
+//                hasReviewTextlike(form.getSearch()).
 //                and(hasRattingGreaterThanOrEqualTo(form.getMinRating())).
-//                and(hasRattingLessThanOrEqualTo(form.getMaxRating()));
+//                and(hasRattingLessThanOrEqualTo(form.getMaxRating())).
 //                and(hasReviewDateGreaterThanOrEqualTo(form.getMinReviewDate())).
 //                and(hasReviewDateLessThanOrEqualTo(form.getMaxReviewDate()));
     }
@@ -45,21 +47,21 @@ public class ProductReviewsSpecification {
 
 
 
-    private static Specification<ProductReviews> hasRattingGreaterThanOrEqualTo ( Integer minRatting ) {
+    private static Specification<ProductReviews> hasRattingGreaterThanOrEqualTo ( Integer minRating ) {
         return ( root, query, builder ) -> {
-            if (minRatting == null) {
+            if (minRating == null) {
                 return null;
             }
-            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.rating),minRatting);
+            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.rating),minRating);
         };
     }
 
-    private static Specification<ProductReviews> hasRattingLessThanOrEqualTo ( Integer maxRatting ) {
+    private static Specification<ProductReviews> hasRattingLessThanOrEqualTo ( Integer maxRating ) {
         return ( root, query, builder ) -> {
-            if (maxRatting == null) {
+            if (maxRating == null) {
                 return null;
             }
-            return builder.lessThanOrEqualTo(root.get(ProductReviews_.rating),maxRatting);
+            return builder.lessThanOrEqualTo(root.get(ProductReviews_.rating),maxRating);
         };
     }
     private static Specification<ProductReviews> hasReviewDateGreaterThanOrEqualTo ( LocalDate minReviewDate ) {

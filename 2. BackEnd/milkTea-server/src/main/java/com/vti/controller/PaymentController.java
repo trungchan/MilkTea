@@ -15,6 +15,8 @@ import java.util.function.Function;
 
 @RestController
 @RequestMapping("api/v1/Payments")
+@CrossOrigin("*")
+
 public class PaymentController {
     @Autowired
     private IPaymentService paymentService;

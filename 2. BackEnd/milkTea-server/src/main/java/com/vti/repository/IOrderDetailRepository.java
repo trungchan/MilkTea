@@ -8,5 +8,6 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetails, Inte
     boolean existsById(int id);
 
     void deleteById(int id);
+    void deleteByOrdersId(Integer id);
 
 }

@@ -8,6 +8,7 @@ import com.vti.form.OrderFormForCreatingOrUpdate;
 import com.vti.repository.IAccountRepository;
 import com.vti.repository.IOrderDetailRepository;
 import com.vti.repository.IOrderRepository;
+import com.vti.repository.IPaymentRepository;
 import com.vti.specification.OrdersSpectification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,10 @@ public class OrderService implements IOrderService {
 
     @Autowired
     private IOrderDetailRepository orderDetailRepository;
+
+    @Autowired
+    private IPaymentRepository paymentRepository;
+
 
     @Autowired
     private IAccountRepository accountRepository;
@@ -45,7 +50,7 @@ public class OrderService implements IOrderService {
     @Override
     public Orders createOrUpdateOrder ( OrderFormForCreatingOrUpdate form ) {
        Account account = accountRepository.findById(form.getAccountId()).get();
-        Orders orders = orderRepository.save(form.toOrder(account));// insert order
+//        Orders orders = orderRepository.save(form.toOrder(account));// insert order
 //        form.getOrderDetailForms()
         //luu order_detail(don hang do mua nhung sp nao)
 //        for ls detail
@@ -57,13 +62,14 @@ public class OrderService implements IOrderService {
 //        payments.setAccount();
         //insertt payment
 
-
-        return  null;
+        return  orderRepository.save(form.toOrder(account));
     }
 
     @Override
     public void deleteOrder ( int id ) {
-        orderRepository.deleteById(id);
+         orderDetailRepository.deleteByOrdersId(id);
+         paymentRepository.deleteByOrdersId(id);
+         orderRepository.deleteById(id);
     }
 
     @Override

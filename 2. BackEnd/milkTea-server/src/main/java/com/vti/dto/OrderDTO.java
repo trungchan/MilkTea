@@ -28,7 +28,7 @@ public class OrderDTO {
     @NoArgsConstructor
     static class OrderDetailDTO {
         private int id;
-        private String productsName;
+        private int productsId;
         private int quantity;
         private String size;
         private Double unitPrice;
