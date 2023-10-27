@@ -11,9 +11,9 @@ public interface IOrderDetailService {
 
     OrderDetails getOrderDetailById(int id);
 
-    OrderDetails updateOrderDetail(OrderDetailsFormForCreatingOrUpdating updatedOrderDetail);
-
     Page<OrderDetails> getAllOrderDetails(Pageable pageable, String search);
 
     boolean deleteOrderDetail(int id);
+
+    OrderDetails updateOrderDetail(int id, OrderDetailsFormForCreatingOrUpdating updatedOrderDetail);
 }

@@ -19,10 +19,26 @@ public class PaymentController {
     @Autowired
     private IPaymentService paymentService;
 
-    @PostMapping
-    public ResponseEntity<?> createPayment(@RequestBody PaymentFormForCreatingOrUpdating paymentForm) {
-        Payments createdPayment = paymentService.createPayment(paymentForm);
-        return new ResponseEntity<>(createdPayment, HttpStatus.CREATED);
+    // Retrieve all payments
+    @GetMapping
+    public ResponseEntity<?> getAllPayments(Pageable pageable, @RequestParam(required = false) String search) {
+        Page<Payments> paymentsPage = paymentService.getAllPayments(pageable, search);
+        Page<PaymentDTO> paymentDTOS = paymentsPage.map(new Function<Payments, PaymentDTO>() {
+            @Override
+            public PaymentDTO apply(Payments payments) {
+                PaymentDTO paymentDTO = new PaymentDTO();
+                paymentDTO.setId(payments.getId());
+                paymentDTO.setOrdersId(payments.getOrders().getId());
+                paymentDTO.setName(payments.getName());
+                paymentDTO.setEmail(payments.getEmail());
+                paymentDTO.setPhone(payments.getPhone());
+                paymentDTO.setAddress(payments.getAddress());
+                paymentDTO.setBankNumber(payments.getBankNumber());
+                paymentDTO.setTypePay(payments.getTypePay());
+                return paymentDTO;
+            }
+        });
+        return new ResponseEntity<>(paymentDTOS, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -46,18 +62,31 @@ public class PaymentController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity<?> createPayment(@RequestBody PaymentFormForCreatingOrUpdating paymentForm) {
+        try {
+            paymentService.createPayment(paymentForm);
+            return new ResponseEntity<>("CREATED", HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            return new ResponseEntity<>("Can't Create New Payment", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     // Update an existing payment
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePayment(@PathVariable("id") int id, @RequestBody PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
-        Payments payment = paymentService.getPaymentById(id);
-        if (payment != null) {
-            payment.setId(paymentUpdatingForm.getId()); // Set the ID of the updated payment
-            Payments updated = paymentService.updatePayment(paymentUpdatingForm);
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Not found",HttpStatus.NOT_FOUND);
-        }
-    }
+      try {
+          paymentService.updatePayment(id, paymentUpdatingForm);
+			return new ResponseEntity<>("updated", HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+
+	}
+
 
     // Delete a payment by ID
     @DeleteMapping("/{id}")
@@ -66,29 +95,9 @@ public class PaymentController {
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>("Not found",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found", HttpStatus.NOT_FOUND);
         }
     }
 
-    // Retrieve all payments
-    @GetMapping
-    public ResponseEntity<?> getAllPayments(Pageable pageable, @RequestParam(required = false) String search) {
-        Page<Payments> paymentsPage = paymentService.getAllPayments(pageable, search);
-        Page<PaymentDTO> paymentDTOS = paymentsPage.map(new Function<Payments, PaymentDTO>() {
-            @Override
-            public PaymentDTO apply(Payments payments) {
-                PaymentDTO paymentDTO = new PaymentDTO();
-                paymentDTO.setId(payments.getId());
-                paymentDTO.setOrdersId(payments.getOrders().getId());
-                paymentDTO.setName(payments.getName());
-                paymentDTO.setEmail(payments.getEmail());
-                paymentDTO.setPhone(payments.getPhone());
-                paymentDTO.setAddress(payments.getAddress());
-                paymentDTO.setBankNumber(payments.getBankNumber());
-                paymentDTO.setTypePay(payments.getTypePay());
-                return paymentDTO;
-            }
-        });
-        return new ResponseEntity<>(paymentDTOS, HttpStatus.OK);
-    }
+
 }
