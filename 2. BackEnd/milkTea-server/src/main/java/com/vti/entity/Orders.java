@@ -37,6 +37,9 @@ public class Orders implements Serializable {
     @OneToMany(mappedBy = "orders")
     private List<OrderDetails> orderDetails;
 
+    @OneToMany(mappedBy = "orders")
+    private List<Payments> payments;
+
     public Orders ( Account account, Date orderDate ) {
         this.account = account;
         this.orderDate = orderDate;

@@ -5,18 +5,17 @@ import com.vti.form.PaymentFormForCreatingOrUpdating;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
-
 public interface IPaymentService {
 
-    Payments getPaymentById(Long id);
+    Payments getPaymentById(int id);
 
     Payments createPayment(PaymentFormForCreatingOrUpdating paymentForm);
 
-    boolean deletePayment(Long id);
+    boolean deletePayment(int id);
 
     Page<Payments> getAllPayments(Pageable pageable, String search);
 
 
-    Payments updatePayment(PaymentFormForCreatingOrUpdating paymentUpdatingForm);
+
+    Payments updatePayment(int id, PaymentFormForCreatingOrUpdating paymentUpdatingForm);
 }

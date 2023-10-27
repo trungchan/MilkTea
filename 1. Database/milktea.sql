@@ -46,7 +46,7 @@ CREATE TABLE Orders (
 DROP TABLE IF EXISTS Payments;
 CREATE TABLE Payments (
     payment_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    account_id INT UNSIGNED NOT NULL,
+    order_id INT UNSIGNED NOT NULL,
     payment_date DATETIME DEFAULT NOW(),
     total_payment DOUBLE NOT NULL,
 	`name` VARCHAR(255),
@@ -55,7 +55,7 @@ CREATE TABLE Payments (
     address VARCHAR(400),
     type_pay ENUM('COD','BANKING') DEFAULT 'COD',
     bank_number VARCHAR(20),
-    FOREIGN KEY (account_id) REFERENCES `Account`(account_id)
+    FOREIGN KEY (order_id) REFERENCES `Orders`(order_id)
 );
 
 DROP TABLE IF EXISTS OrderDetails;
@@ -148,7 +148,7 @@ VALUES 		(1),
             (8),
             (9);
             
-INSERT INTO Payments    (account_id , total_payment, `name`, phone_number, address, type_pay, bank_number )
+INSERT INTO Payments    (order_id , total_payment, `name`, phone_number, address, type_pay, bank_number )
 VALUES 					(1, 700000, null, null, null, 'BANKING', '15434343434' ),
 						(2, 100000, 'Trung', '09333131213', '68 Cầu Giấy Hà Nội', 'COD', null ),
                         (3, 59000, null, null, null,  'BANKING', '1232131311' ),

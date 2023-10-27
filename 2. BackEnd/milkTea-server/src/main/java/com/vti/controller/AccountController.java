@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/Account")
+@CrossOrigin("*")
 public class AccountController {
     @Autowired
     private IAccountService accountService;

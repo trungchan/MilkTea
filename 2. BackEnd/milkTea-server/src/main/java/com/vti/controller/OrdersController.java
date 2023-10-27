@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/Orders")
+@CrossOrigin("*")
 public class OrdersController {
     @Autowired
     private ModelMapper mapper;

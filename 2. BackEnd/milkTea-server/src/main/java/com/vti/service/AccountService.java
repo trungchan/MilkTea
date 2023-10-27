@@ -6,9 +6,6 @@ import com.vti.entity.Account;
 import com.vti.form.AccountFromForCreatingOrUpdating;
 import com.vti.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +13,6 @@ import java.util.Optional;
 
 @Service
 public class AccountService implements IAccountService
-//        , UserDetailsService
 {
     @Autowired
     private IAccountRepository accountRepository;
@@ -43,12 +39,10 @@ public class AccountService implements IAccountService
         }
         return null;
     }
-
     @Override
     public Account UpdateAccountRegister ( AccountFromForCreatingOrUpdating form ) {
         return accountRepository.save(form.toAccount());
     }
-
 
     @Override
     public Account getAccountById ( int id ) {

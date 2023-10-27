@@ -15,41 +15,48 @@ import java.util.function.Function;
 
 
 @RestController
-@RequestMapping("/order-details")
+@RequestMapping("api/v1/Orderdetails")
+@CrossOrigin("*")
 public class OrderDetailController {
     @Autowired
     private IOrderDetailService orderDetailService;
 
     @PostMapping
     public ResponseEntity<?> createOrderDetail(@RequestBody OrderDetailsFormForCreatingOrUpdating orderDetail) {
-        OrderDetails createdOrderDetail = orderDetailService.createOrderDetail(orderDetail);
-        return new ResponseEntity<>(createdOrderDetail, HttpStatus.CREATED);
+        orderDetailService.createOrderDetail(orderDetail);
+        return new ResponseEntity<>("created", HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOrderDetailById(@PathVariable("id") Long id) {
-        OrderDetails orderDetail = orderDetailService.getOrderDetailById(id);
-        if (orderDetail != null) {
-            return new ResponseEntity<>(orderDetail, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> getOrderDetailById(@PathVariable("id") int id) {
+        try {
+            OrderDetails orderDetails = orderDetailService.getOrderDetailById(id);
+            // chuyển đổi dữ liệu
+            OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
+            orderDetailDTO.setId(orderDetails.getId());
+            orderDetailDTO.setOrdersId(orderDetails.getOrders().getId());
+            orderDetailDTO.setProductsName(orderDetails.getProducts().getProductName());
+            orderDetailDTO.setSize(orderDetails.getSize());
+            orderDetailDTO.setQuantity(orderDetails.getQuantity());
+            orderDetailDTO.setUnitPrice(orderDetails.getUnitPrice());
+            return new ResponseEntity<>(orderDetailDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateOrderDetail(@PathVariable("id") Long id, @RequestBody OrderDetailsFormForCreatingOrUpdating updatedOrderDetail) {
-        OrderDetails orderDetail = orderDetailService.getOrderDetailById(id);
-        if (orderDetail != null) {
-            updatedOrderDetail.setId(orderDetail.getId());
-            OrderDetails updated = orderDetailService.updateOrderDetail(updatedOrderDetail);
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> updateOrderDetail(@PathVariable("id") int id, @RequestBody OrderDetailsFormForCreatingOrUpdating updatedOrderDetail) {
+//        OrderDetails orderDetail = orderDetailService.getOrderDetailById(id);
+
+           orderDetailService.updateOrderDetail(id,updatedOrderDetail);
+            return new ResponseEntity<>("updated", HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteOrderDetail(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteOrderDetail(@PathVariable("id") int id) {
         boolean deleted = orderDetailService.deleteOrderDetail(id);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -66,9 +73,9 @@ public class OrderDetailController {
             public OrderDetailDTO apply(OrderDetails orderDetails) {
                 OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
                 orderDetailDTO.setId(orderDetails.getId());
-                orderDetailDTO.setOrders(orderDetails.getOrders().toString());
-                orderDetailDTO.setProducts(orderDetailDTO.getProducts());
-                orderDetailDTO.setSize(orderDetails.getSize().toString());
+                orderDetailDTO.setOrdersId(orderDetails.getOrders().getId());
+                orderDetailDTO.setProductsName(orderDetails.getProducts().getProductName());
+                orderDetailDTO.setSize(orderDetails.getSize());
                 orderDetailDTO.setQuantity(orderDetails.getQuantity());
                 orderDetailDTO.setUnitPrice(orderDetails.getUnitPrice());
                 return orderDetailDTO;
@@ -77,4 +84,3 @@ public class OrderDetailController {
         return new ResponseEntity<>(orderDetailDTOS, HttpStatus.OK);
     }
 }
-

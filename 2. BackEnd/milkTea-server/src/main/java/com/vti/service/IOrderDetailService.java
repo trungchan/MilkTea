@@ -9,11 +9,11 @@ import org.springframework.data.domain.Pageable;
 public interface IOrderDetailService {
     OrderDetails createOrderDetail(OrderDetailsFormForCreatingOrUpdating orderDetail);
 
-    OrderDetails getOrderDetailById(Long id);
-
-    OrderDetails updateOrderDetail(OrderDetailsFormForCreatingOrUpdating updatedOrderDetail);
+    OrderDetails getOrderDetailById(int id);
 
     Page<OrderDetails> getAllOrderDetails(Pageable pageable, String search);
 
-    boolean deleteOrderDetail(Long id);
+    boolean deleteOrderDetail(int id);
+
+    OrderDetails updateOrderDetail(int id, OrderDetailsFormForCreatingOrUpdating updatedOrderDetail);
 }
