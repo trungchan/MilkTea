@@ -21,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/ProductReviews")
+@CrossOrigin("*")
 public class ProductReviewsController {
     @Autowired
     private ModelMapper mapper;

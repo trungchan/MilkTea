@@ -13,8 +13,8 @@ import lombok.Setter;
 public class OrderDetailsFormForCreatingOrUpdating {
     private int id;
     private int ordersId;
-    private int size;
-    private String productName;
+    private int productId;
     private int quantity;
+    private String size;
     private Double unitPrice;
 }

@@ -1,6 +1,7 @@
 package com.vti.form;
 
 import com.vti.entity.Orders;
+import com.vti.entity.Payments;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,5 @@ public class PaymentFormForCreatingOrUpdating {
     private String phone;
     private String address;
     private String bankNumber;
-
-
+    private Payments.TypePay typepay;
 }

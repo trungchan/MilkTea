@@ -16,14 +16,15 @@ import java.util.function.Function;
 
 @RestController
 @RequestMapping("api/v1/Orderdetails")
+@CrossOrigin("*")
 public class OrderDetailController {
     @Autowired
     private IOrderDetailService orderDetailService;
 
     @PostMapping
     public ResponseEntity<?> createOrderDetail(@RequestBody OrderDetailsFormForCreatingOrUpdating orderDetail) {
-        OrderDetails createdOrderDetail = orderDetailService.createOrderDetail(orderDetail);
-        return new ResponseEntity<>(createdOrderDetail, HttpStatus.CREATED);
+        orderDetailService.createOrderDetail(orderDetail);
+        return new ResponseEntity<>("created", HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -47,14 +48,11 @@ public class OrderDetailController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateOrderDetail(@PathVariable("id") int id, @RequestBody OrderDetailsFormForCreatingOrUpdating updatedOrderDetail) {
-        OrderDetails orderDetail = orderDetailService.getOrderDetailById(id);
-        if (orderDetail != null) {
-            updatedOrderDetail.setId(orderDetail.getId());
-            OrderDetails updated = orderDetailService.updateOrderDetail(updatedOrderDetail);
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+//        OrderDetails orderDetail = orderDetailService.getOrderDetailById(id);
+
+           orderDetailService.updateOrderDetail(id,updatedOrderDetail);
+            return new ResponseEntity<>("updated", HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{id}")

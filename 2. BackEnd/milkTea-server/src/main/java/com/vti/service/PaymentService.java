@@ -21,6 +21,7 @@ public class PaymentService implements IPaymentService {
     @Autowired
     private IOrderRepository orderRepository;
 
+
     @Override
     public Payments getPaymentById(int id) {
 
@@ -39,6 +40,7 @@ public class PaymentService implements IPaymentService {
         payments.setPaymentDate(createPaymentForm.getPaymentDate());
         payments.setBankNumber(createPaymentForm.getBankNumber());
         payments.setTotalPayment(createPaymentForm.getTotalPayment());
+        payments.setTypePay(createPaymentForm.getTypepay());
         return paymentRepository.save(payments);
     }
 
@@ -67,11 +69,11 @@ public class PaymentService implements IPaymentService {
         return paymentRepository.findAll(where, pageable);
     }
 
-
     @Override
-    public Payments updatePayment(PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
+    public Payments updatePayment(int id, PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
+        Payments payments = paymentRepository.getById(id);
         Orders orders = orderRepository.getById(paymentUpdatingForm.getOrderId());
-        Payments payments = new Payments();
+//        Payments payments = new Payments();
         payments.setName(paymentUpdatingForm.getName());
         payments.setOrders(orders);
         payments.setAddress(paymentUpdatingForm.getAddress());
@@ -80,6 +82,9 @@ public class PaymentService implements IPaymentService {
         payments.setPaymentDate(paymentUpdatingForm.getPaymentDate());
         payments.setBankNumber(paymentUpdatingForm.getBankNumber());
         payments.setTotalPayment(paymentUpdatingForm.getTotalPayment());
-        return paymentRepository.save(payments);
+        payments.setTypePay(paymentUpdatingForm.getTypepay());
+        Payments paymentUpdate = paymentRepository.save(payments);
+        return paymentUpdate;
     }
+
 }
