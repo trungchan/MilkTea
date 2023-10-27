@@ -1,0 +1,91 @@
+.headerStyle {
+    text-align: 'center';
+    color: '#fff';
+    
+    padding-inline: 50;
+    
+    background-color:#FFFF99;
+    width: auto;
+    height: 12em;
+    
+  };
+  
+  .homepage {
+    background-color:#FFFF99;
+       width: 100px;
+       height: 1em;
+
+  }
+
+  .Seach_bt{
+    width: 60%;
+  }
+
+  .contentStyle{
+    text-align: 'center';
+    min-height: 120;
+    line-height: '120px';
+    color: '#fff';
+    background-color: white;
+  };
+
+  .list_product{
+
+    height: 3em;
+  }
+  .footerStyle{
+    text-align: 'center';
+    color: '#fff';
+    background-color: rgb(10, 11, 12);
+  };
+
+  .slick-dots li button{
+   
+    background-color: black !important;
+  }
+  .slick-dots li button:before{
+    background-color: black !important;
+  }
+
+  .Logo {
+max-width: 100%;
+height: auto;
+
+  }
+
+  .image-css {
+  height: 300px !important
+}
+
+.h3-css{
+  width: 315px !important
+}
+
+.p1 {
+ color: white;
+}
+
+.h2 {
+  color: chocolate;
+}
+
+.color-button {
+  background-color: chocolate;
+
+}
+
+.color-button :hover {
+ color: black;
+
+}
+
+.Col_color {
+background-color: chocolate;
+height: 32rem;
+}
+
+/* .Css_div {
+;
+  text-align: center;
+} */
+  
