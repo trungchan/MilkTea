@@ -5,15 +5,20 @@ import com.vti.form.OrderFilterForm;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class OrdersSpectification {
     public static Specification<Orders> buildWhere ( OrderFilterForm form ) {
         if (form == null) {
             return null;
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate min = Objects.nonNull(form.getMinOrderDate()) ? LocalDate.parse(form.getMinOrderDate(), formatter): null;
+        LocalDate max = Objects.nonNull(form.getMaxOrderDate()) ? LocalDate.parse(form.getMaxOrderDate(), formatter): null;
         return
-                hasOrderDateGreaterThanOrEqualTo(form.getMinOrderDate()).
-                        and(hasOrderDateLessThanOrEqualTo(form.getMaxOrderDate()));
+                hasOrderDateGreaterThanOrEqualTo(min).
+                        and(hasOrderDateLessThanOrEqualTo(max));
     }
 
     private static Specification<Orders> hasOrderDateGreaterThanOrEqualTo ( LocalDate minOrderDate ) {

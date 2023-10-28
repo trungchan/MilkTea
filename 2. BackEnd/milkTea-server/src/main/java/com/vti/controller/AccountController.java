@@ -28,7 +28,7 @@ public class AccountController {
     @GetMapping
     public ResponseEntity<?> getAllUsers () {
         List<Account> entities = accountService.getAllUsers();
-        List<AccountDTO> dtos = mapper.map(entities, new TypeToken<List<Account>>() {}.getType());
+        List<AccountDTO> dtos = mapper.map(entities, new TypeToken<List<AccountDTO>>() {}.getType());
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
     @PostMapping
