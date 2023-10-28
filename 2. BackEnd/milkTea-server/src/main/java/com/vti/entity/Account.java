@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -54,8 +55,12 @@ public class Account implements Serializable {
     private List<ProductReviews> productReviews;
 
 
-    public enum Role {
-        ADMIN, USER
+    public enum Role implements GrantedAuthority {
+        ADMIN, USER;
+        @Override
+        public String getAuthority(){
+            return name();
+        }
     }
     public Account ( String email, String userName, String phone, String passWord ) {
         this.email = email;

@@ -19,5 +19,9 @@ public class Token {
 
     @Column(name = "token" ,length = 1000)
     private String token;
+    @Column(name = "user_Agent")
+    private String userAgent;
+    @Column(name = "expiration")
+    private Date expiration;
 
 }
