@@ -1,16 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react'
+// import Homepage from "./homepage/Home"
+// import Content from  "./homepage/content"
+// import Footer from "./homepage/footer"
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a>aaaaaaaaaaaa</a>
-       </div>
+    Aaaaaaaaaaaaaâ
+    {/* <Homepage/>
+    <Content/>
+    <Footer/> */}
     </>
   )
 }
