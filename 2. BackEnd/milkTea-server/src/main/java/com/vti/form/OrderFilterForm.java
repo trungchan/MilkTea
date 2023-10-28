@@ -1,9 +1,11 @@
 package com.vti.form;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Parent;
 
 import java.time.LocalDate;
 
@@ -12,7 +14,9 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class OrderFilterForm {
-    private LocalDate maxOrderDate;
-    private LocalDate minOrderDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private String maxOrderDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private String minOrderDate;
 
 }

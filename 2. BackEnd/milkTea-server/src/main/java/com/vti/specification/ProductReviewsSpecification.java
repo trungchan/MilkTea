@@ -14,19 +14,23 @@ public class ProductReviewsSpecification {
         if (form == null) {
             return null;
         }
+//        Specification<ProductReviews> where = hasRattingGreaterThanOrEqualTo(form.getMinRating());
         Specification<ProductReviews> where = hasReviewTextlike(form.getSearch());
-        if (form.getMinRating() != 0){
-            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
-        }
-        if (form.getMaxRating() != 0){
-            where.and(hasRattingLessThanOrEqualTo(form.getMaxRating()));
-        }
-        if (form.getMaxReviewDate() != null){
-            where.and(hasReviewDateGreaterThanOrEqualTo(form.getMinReviewDate()));
-        }
-        if (Objects.nonNull(form.getMinReviewDate())){
-            where.and(hasReviewDateLessThanOrEqualTo(form.getMaxReviewDate()));
-        }
+//        if (form.getMinRating() != null){
+//            where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()));
+//        }
+//        if (Objects.nonNull(form.getMaxRating())){
+//            where.and(hasRattingLessThanOrEqualTo(form.getMaxRating()));
+//        }
+//        if (form.getMaxReviewDate() != null){
+//            where.and(hasReviewDateGreaterThanOrEqualTo(form.getMinReviewDate()));
+//        }
+//        if (Objects.nonNull(form.getMinReviewDate())){
+//            where.and(hasReviewDateLessThanOrEqualTo(form.getMaxReviewDate()));
+//        }
+        where.and(hasRattingGreaterThanOrEqualTo(form.getMinRating()))
+                .and(hasRattingLessThanOrEqualTo(form.getMaxRating()));
+
         return  where;
 //        return
 //                hasReviewTextlike(form.getSearch()).
@@ -49,7 +53,7 @@ public class ProductReviewsSpecification {
 
     private static Specification<ProductReviews> hasRattingGreaterThanOrEqualTo ( Integer minRating ) {
         return ( root, query, builder ) -> {
-            if (minRating == null) {
+            if (Objects.nonNull(minRating)) {
                 return null;
             }
             return builder.greaterThanOrEqualTo(root.get(ProductReviews_.rating),minRating);
