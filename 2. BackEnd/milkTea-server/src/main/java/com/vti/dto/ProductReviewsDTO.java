@@ -15,7 +15,7 @@ import java.util.Date;
 public class ProductReviewsDTO {
     private int id;
     private int accountId;
-    private String productsName;
+    private String productsProductName;
     private int rating;
     private String reviewText;
     @JsonFormat(pattern="yyyy-MM-dd")
