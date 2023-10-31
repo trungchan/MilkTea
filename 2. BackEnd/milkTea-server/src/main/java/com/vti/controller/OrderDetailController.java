@@ -23,7 +23,7 @@ public class OrderDetailController {
     @PostMapping
     public ResponseEntity<?> createOrderDetail(@RequestBody OrderDetailsFormForCreatingOrUpdating orderDetail) {
         orderDetailService.createOrderDetail(orderDetail);
-        return new ResponseEntity<>("created", HttpStatus.CREATED);
+        return new ResponseEntity<>("Created", HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -50,7 +50,7 @@ public class OrderDetailController {
 //        OrderDetails orderDetail = orderDetailService.getOrderDetailById(id);
 
            orderDetailService.updateOrderDetail(id,updatedOrderDetail);
-            return new ResponseEntity<>("updated", HttpStatus.OK);
+            return new ResponseEntity<>("Updated", HttpStatus.OK);
 
     }
 
@@ -58,9 +58,9 @@ public class OrderDetailController {
     public ResponseEntity<?> deleteOrderDetail(@PathVariable("id") int id) {
         boolean deleted = orderDetailService.deleteOrderDetail(id);
         if (deleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("Deleted",HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not Found",HttpStatus.NOT_FOUND);
         }
     }
 

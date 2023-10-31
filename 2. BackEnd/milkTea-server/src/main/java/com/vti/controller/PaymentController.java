@@ -66,7 +66,7 @@ public class PaymentController {
     public ResponseEntity<?> createPayment(@RequestBody PaymentFormForCreatingOrUpdating paymentForm) {
         try {
             paymentService.createPayment(paymentForm);
-            return new ResponseEntity<>("CREATED", HttpStatus.CREATED);
+            return new ResponseEntity<>("Created", HttpStatus.CREATED);
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -79,7 +79,7 @@ public class PaymentController {
     public ResponseEntity<?> updatePayment(@PathVariable("id") int id, @RequestBody PaymentFormForCreatingOrUpdating paymentUpdatingForm) {
       try {
           paymentService.updatePayment(id, paymentUpdatingForm);
-			return new ResponseEntity<>("updated", HttpStatus.OK);
+			return new ResponseEntity<>("Updated", HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -93,7 +93,7 @@ public class PaymentController {
     public ResponseEntity<?> deletePayment(@PathVariable("id") int id) {
         boolean deleted = paymentService.deletePayment(id);
         if (deleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("Deleted",HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Not found", HttpStatus.NOT_FOUND);
         }
