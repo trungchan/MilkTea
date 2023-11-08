@@ -1,0 +1,3 @@
+export const SHOW_FORM_CREATE = "SHOW_FORM_CREATE";
+
+export const CLOSE_FORM_CREATE = "CLOSE_FORM_CREATE";

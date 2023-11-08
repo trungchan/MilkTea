@@ -1,0 +1,22 @@
+.searchContainer {
+    position: relative;
+  }
+  
+  .searchContainer .searchInput {
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+  
+  /* .searchContainer .createButton {
+    position: relative;
+    top: -40px;
+    right: 0;
+    
+   
+  } */
+  .createButton
+  {
+    margin-top: 10px;
+    margin-bottom: 10px;
+   
+  }

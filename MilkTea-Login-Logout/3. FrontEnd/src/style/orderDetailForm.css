@@ -1,0 +1,16 @@
+.totalAmout{
+  /* position: absolute; Thiết lập vị trí tuyệt đối */
+  position: relative;
+ margin-left: 1270px;
+  font-size: larger;
+  font-weight: bold;
+}
+.searchContainer .searchInput  {
+    margin-bottom: 50px;
+    
+  }
+  .ant-input-group{
+    margin-bottom: 10px;
+    margin-top: 10px; 
+    position: relative;
+  }
