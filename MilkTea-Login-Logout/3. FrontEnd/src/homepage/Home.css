@@ -4,15 +4,20 @@
     
     padding-inline: 50;
     
-    background-color:#FFFF99;
+    background-color:#84401b;
     width: auto;
-    height: 7em;
+    height: 64px;
     
   }
   
   .home-page {
-       padding-top: 2em !important; 
-       padding-bottom: 2em !important; 
+    padding: 20px;
+       /* padding-top: 1.5em !important; 
+       padding-bottom: 1.5em !important; */
+       align-items: center;
+       justify-content: center;
+       cursor: pointer; 
+       
   }
 
   .Seach_bt{
@@ -78,9 +83,14 @@ height: auto;
 }
 
 .Col_color {
-background-color: chocolate;
-height: 32rem;
-}
+  padding: 80px 56px 96px 65px;
+  background: #84401b;
+  min-height: 443px;
+  /* margin-top: 14px; */
+  display: flex;
+  text-align: center;
+  color: white;
+  }
 
 .css_div {
  padding-top: 10em;
@@ -127,4 +137,33 @@ a:hover{
   position: absolute;
  
   
+}
+.text-home-page{
+    margin-top: 200px;
+    margin-left: 40px;
+    font-weight: 600;
+    font-size: 35px;
+    line-height: 21px;
+}
+.text-home-page-2{
+  margin-left: 40px;
+  
+    
+    font-size: 20px;
+    line-height: 30px;
+}
+.header-text{
+    margin-top: 30px;
+}
+.button-color{
+  background-color: #fff;;
+    height: 40px;
+    color: #84401b;
+    width: 60%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    align-items: center;
+    justify-content: center;
 }

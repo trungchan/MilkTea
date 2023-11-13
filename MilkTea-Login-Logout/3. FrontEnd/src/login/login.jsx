@@ -19,8 +19,9 @@ const Login3 = () => {
   const [isRegistering, setIsRegistering] = useState(false);
 
   return (
+    
     <MDBContainer className="my-5">
-      <MDBCard className="login-form">
+      <MDBCard className="">
         <MDBRow className="g-0">
           <MDBCol md="6">
             <MDBCardImage
@@ -93,6 +94,7 @@ const Login3 = () => {
         </MDBRow>
       </MDBCard>
     </MDBContainer>
+    
   );
 };
 

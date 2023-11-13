@@ -1,6 +1,7 @@
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import React, { useState } from "react";
 import {addNewAccount} from "../Container/API/AccountAPI"
+import { Button } from "antd";
 
 
 function registerItem() {
@@ -77,9 +78,9 @@ function registerItem() {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
-        <MDBBtn className="mb-4 px-5" color="dark" size="lg" onClick={handleSubmit}>
-          Register
-        </MDBBtn>
+        <div className="d-grid ">
+                <Button className='button-color' onClick={handleSubmit}>Register</Button>
+            </div>
       </>
     
   );

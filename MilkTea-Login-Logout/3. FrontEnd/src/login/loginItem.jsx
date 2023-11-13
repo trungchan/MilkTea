@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../api/UserAPI";
 import { loginApi } from "../product/api";
 import axios from "axios";
+import { Button } from "antd";
 function loginItem() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,7 @@ function loginItem() {
         localStorage.setItem("role", res.data.role);
         localStorage.setItem("id", res.data.id);
         localStorage.setItem("user", res.data.userName);
-        // alert("Đăng nhập thành công");
+        alert("Đăng nhập thành công");
         navigate("/");
       })
       .catch((err) => console.log(err));
@@ -52,14 +53,17 @@ function loginItem() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <MDBBtn
+       <div className="d-grid p-2 ">
+                <Button className='button-color' onClick={handleLogin}>Sign in</Button>
+            </div>
+      {/* <MDBBtn
         className="mb-4 px-5"
         color="dark"
         size="lg"
         onClick={handleLogin}
       >
         Login
-      </MDBBtn>
+      </MDBBtn> */}
       <a
         href="#!"
         className="small text-muted mb-3"
