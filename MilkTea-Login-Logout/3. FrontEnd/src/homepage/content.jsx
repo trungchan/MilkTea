@@ -93,7 +93,7 @@ function Content() {
             <Image src="https://bizweb.dktcdn.net/100/477/681/themes/895448/assets/slider_1.jpg?1695629614469" />
           </div>
 
-          <div>
+          {/* <div>
             <h3 align="center" className="space-top">MENU HÔM NAY</h3>
             <Row  className="space-top">
               <Col span={8}></Col>
@@ -144,12 +144,12 @@ function Content() {
 
               </Row>
             </div>
-          </div>
+          </div> */}
           <div>
             <Row className="row-css1" justify="center">
               <Col span={10} className="Col_color">
                 <DemoBox value={100}>
-                  <div className="css_div" align="middle">
+                  <div className="css_div" >
                     <h3>THỜI GIAN MỞ CỬA</h3>
                     <p>
                       “Winggo" - Một lời ngỏ mộc mạc để mình ngồi lại bên nhau
