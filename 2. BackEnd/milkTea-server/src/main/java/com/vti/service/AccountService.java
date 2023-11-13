@@ -65,7 +65,9 @@ public class AccountService implements IAccountService {
 
     @Override
     public Account createAccountRegister ( AccountFromForCreatingOrUpdating form ) {
-        return accountRepository.save(form.toAccount());
+        Account account = form.toAccount();
+        account.setPassWord(passwordEncoder.encode(form.getPassword()));
+        return accountRepository.save(account);
     }
 
 
