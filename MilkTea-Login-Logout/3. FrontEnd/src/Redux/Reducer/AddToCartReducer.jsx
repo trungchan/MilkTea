@@ -51,9 +51,9 @@ export let addToCartReducer = (state = initialState, action) => {
                     return item;
                 });
 
-                let totalQuantity = state.totalQuantity + newItem.quantity; // update quantity
+                let totalQuantity = state.totalQuantity + newItem.quantity; 
                 let totalAmount = updatedlistItems.reduce(
-                    (total, item) => total + Number(item.totalPrice), // Calculate totalAmount against totalPrice
+                    (total, item) => total + Number(item.totalPrice), 
                     0
                 );
 
@@ -66,23 +66,26 @@ export let addToCartReducer = (state = initialState, action) => {
             }
 
            
-        case DELETE_ITEM_CART:
-            let id = action.payload;
-            let itemToDelete = state.listItem.find((item) => item.id === id);
-            let cartItemToDelete = state.listItem.find((item) => item.id === id);
-            if (itemToDelete) {
-                state.listItem = state.listItem.filter((item) => item.id !== id);
-                state.totalQuantity -= state.listItem.quantity;
-            }
-            state.totalAmount = state.listItem.reduce(
-                (total, item) => total + Number(item.price) * Number(item.quantity),
-                0
-            );
-
-            return {
-                ...state,
-               
-            }
+            case DELETE_ITEM_CART:
+                const id = action.payload;
+                const itemToDelete = state.listItem.find((item) => item.id === id);
+              
+                if (itemToDelete) {
+                  const updatedList = state.listItem.filter((item) => item.id !== id);
+                  const deletedItemQuantity = itemToDelete.quantity;
+              
+                  return {
+                    ...state,
+                    listItem: updatedList,
+                    totalQuantity: state.totalQuantity - deletedItemQuantity,
+                    totalAmount: updatedList.reduce(
+                      (total, item) => total + parseFloat(item.price) * item.quantity,
+                      0
+                    ),
+                  };
+                }
+              
+                return state;
             case DELETE_LIST_ITEM_CART:
             return {
                 ...state,

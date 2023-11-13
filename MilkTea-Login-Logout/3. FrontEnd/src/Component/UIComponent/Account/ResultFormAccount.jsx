@@ -26,7 +26,7 @@ function ResultFormAccount(props) {
   // let [totalPage, setTotalPage] = useState(1);
   let [searchedText,setSearchedText]=useState("");
 
-  console.log(listAccountAPI);
+
   //----------End Declare ----------
 
   //useEffect
@@ -47,7 +47,7 @@ function ResultFormAccount(props) {
   }, [listAccountAPI]);
 
   //--------End useEffect---------
-  // console.log(totalPage);
+  
   //Function
   // const handlePageChange = (page, pageSize) => {
   //   setPage(page);
@@ -112,9 +112,12 @@ function ResultFormAccount(props) {
       (record.date.toString()).includes(searchedText)      
     );
   });
-  console.log(filteredDataSource);
+
   return (
     <>
+    {/* -------------------------------Tiến làm 13/11/2023---------------------------------------- */}
+    <h1>List Accounts</h1>
+    {/* -------------------------------Tiến làm 13/11/2023---------------------------------------- */}
     <Input.Search placeholder="Search here ..." style={{marginBottom: 8}} onSearch={(value) => {setSearchedText(value)}} />
     <Table columns={columns} dataSource={filteredDataSource} 
         // pagination={{

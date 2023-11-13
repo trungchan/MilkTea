@@ -5,7 +5,7 @@ import { actionCloseFormCreate } from "../../../Redux/Action/CreateNewProductFor
 import { actionAddProductAPI, actionFetchProductAPI } from "../../../Redux/Action/ProductAction";
 import {  message } from 'antd'; 
 function ModalCreatenew(props) {
-    let { listCategoryAPI ,onShowSuccessMessage } = props;
+    let { listCategoryAPI ,onShowSuccessMessage,onHandleCreate } = props;
     let showformCreate = useSelector((state) => state.createnewProductForm.showForm);
     let [productsName, setProductname] = useState("");
     let [description, setDescription] = useState("");
@@ -45,12 +45,9 @@ function ModalCreatenew(props) {
         setImageUrl("")
         setCategory("");
         fetchProduct();
+        onHandleCreate();
         dispatch(actionCloseFormCreate());
-        onShowSuccessMessage(messageApi.open({
-            type: 'success',
-            content: 'Tạo sản phẩm thành công',
-            
-          }));
+     
 
     };
 

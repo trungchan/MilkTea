@@ -6,7 +6,7 @@ import ModalCreatenew from './ModalCreatenew';
 import { actionShowFormCreate } from '../../../Redux/Action/CreateNewProductForm';
 
 function ButtonCreateNewProduct(props) {
-    let {listCategoryAPI,setShowSuccessAlert}=props
+    let {listCategoryAPI,setShowSuccessAlert,onHandleCreate}=props
     let dispatch = useDispatch();
     let onOpenFormCreate = () => {
         dispatch(actionShowFormCreate());
@@ -15,7 +15,7 @@ function ButtonCreateNewProduct(props) {
     return (
         <div>
             <Button type="primary" className="createButton" onClick={()=>onOpenFormCreate()}>Create New Product</Button> 
-            <ModalCreatenew listCategoryAPI={listCategoryAPI} setShowSuccessAlert={setShowSuccessAlert}/>
+            <ModalCreatenew listCategoryAPI={listCategoryAPI} setShowSuccessAlert={setShowSuccessAlert} onHandleCreate={onHandleCreate}/>
         </div>
     );
 }

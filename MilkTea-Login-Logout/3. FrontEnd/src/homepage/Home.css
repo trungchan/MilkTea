@@ -115,3 +115,16 @@ a:hover{
   justify-content:space-between;
   padding: 10px;
 }
+
+.space-top{
+  padding-top: 3% !important
+}
+.cartCount{
+  position:relative;
+}
+.badge_count
+{
+  position: absolute;
+ 
+  
+}

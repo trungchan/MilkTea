@@ -10,6 +10,7 @@ import { actionAddPAYMENTAPI } from '../Redux/Action/PaymentAction';
 import { actionAddNewOrderAPI, actionFetchOrderAPI } from '../Redux/Action/OrderAction';
 import { message } from 'antd';
 import 'antd-button-color/dist/css/style.css';
+import '../style/payment.css';
 import { actionDeleteAllList } from '../Redux/Action/AddToCartAction';
 
 function Payment() {
@@ -31,11 +32,11 @@ function Payment() {
     COD: 'COD',
     BANKING: 'BANKING'
   };
-  let [selectedPaymentType, setSelectedPaymentType] = useState("");
+  let [selectedPaymentType, setSelectedPaymentType] = useState("COD");
   let totalAmount = useSelector((state) => state.addToCart.totalAmount);
   //Lấy Id của người dùng đăng nhập vào
   let accountId = localStorage.getItem("id");
-
+console.log(accountId);
   // lấy id order
   let [order, setOrder] = useState([]);
   //tạo fetch lấy API của order
@@ -53,7 +54,6 @@ function Payment() {
           },
         })
       setListOrderNoPage(data.content);
-      console.log('123', data)
       return data.content
     } catch (error) {
       console.error('Error fetching product list: ', error);
@@ -92,7 +92,8 @@ function Payment() {
     };
   });
   // let userObj = Object.fromEntries(ItemNewOrderDetail);
-  console.log(ItemNewOrderDetail);
+ 
+  
 
 
   //Item add to Payments
@@ -106,7 +107,7 @@ function Payment() {
     totalPayment: totalAmount,
     typePay: selectedPaymentType,
   };
-  console.log(ItemNewPayment);
+ 
   //--------------------------End Item insert Data to table ---------------------------------
 
   //--------------------------Function Insert data to table ---------------------------------
@@ -148,14 +149,15 @@ function Payment() {
     try {
       //  addNewOrder();
       dispatch(actionAddNewOrderAPI(accountId));
-      const listOrder = await fetchOrderList()
+      const listOrder =  await fetchOrderList()
       // if (listOrder.length > 0) {
         let lastOrderId = listOrder[listOrder.length - 1].id;
         setOrder(lastOrderId);
       // }
+
       // Once the order is created, use the obtained order ID
       // let newOrderID = order;
-
+ 
       // Prepare data for OrderDetail
       let ItemNewOrderDetail = cartAddItem.map((item) => {
         return {
@@ -166,6 +168,7 @@ function Payment() {
           unitPrice: item.totalPrice,
         };
       });
+
       // Dispatch action to add order details
        dispatch(actionAddNewOrderDetailAPI(ItemNewOrderDetail));
 
@@ -184,6 +187,11 @@ function Payment() {
       // Dispatch action to add payment
         dispatch(actionAddPAYMENTAPI(ItemNewPayment));
       dispatch(actionDeleteAllList());
+      setName("");
+      setAddress("");
+      setPhoneNumber("");
+      setEmail("");
+      setBankNumber("")
     } catch (error) {
       console.error('Error handling payment: ', error);
     }
@@ -195,7 +203,7 @@ function Payment() {
   };
 
   //--------------------------End Function insert Data to table ---------------------------------
-  console.log(selectedPaymentType);
+
   return (
     <div>
       <div className='Container'>
@@ -222,8 +230,8 @@ function Payment() {
           <FormGroup>
             <select name="" id="" value={selectedPaymentType} onChange={(e) => setSelectedPaymentType(e.target.value)}>
               {/* <option value="All">Lựa Chọn Thanh Toán</option> */}
-              <option value={"COD"}>COD</option>
-              <option value={"BANKING"}>Chuyển Khoản</option>
+              <option value={PaymentTypes.COD}>COD</option>
+              <option value={PaymentTypes.BANKING}>Chuyển Khoản</option>
             </select>
           </FormGroup>
           <br />
@@ -243,7 +251,7 @@ function Payment() {
                   <td style={{ width: '180px' }}>
 
                     <img src={item.image} alt="" />
-                    <Badge size="large" count={item.quantity} style={{ backgroundColor: '#52c41a' }} className='badge_count' >
+                    <Badge size="large" count={item.quantity} style={{ backgroundColor: '#52c41a' }} className='badge_count1' >
                     </Badge>
 
                   </td>

@@ -14,10 +14,11 @@ function product() {
   const [current, setCurrent] = useState(1);
   const [data, setData] = useState([]);
   const pageSize = 8;
-
+//--------------------Start Tiến làm -----------------------
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
- 
+
+
 
   useEffect(() => {
     axios.get(`${productApi}?page=1&pageSize=9999`).then((res) => {
@@ -25,8 +26,9 @@ function product() {
       setTotalPages(Math.ceil(res.data.totalElements / pageSize));
     });
     callApi(current, pageSize);
-  }, [current]); 
-
+  }, [current]);
+  //--------------------End Tiến làm -----------------------
+  // ------------------- Start Sửa lại phần này để lấy phân trang cho sản phẩm hiển thị -------------------
   const callApi = (page, pageSize) => {
     axios
       .get(`${productApi}?page=${page}&pageSize=${pageSize}`)
@@ -35,11 +37,11 @@ function product() {
       })
       .catch((err) => console.log(err));
   };
-  
+  // ------------------- End Sửa lại phần này để lấy phân trang cho sản phẩm hiển thị -------------------
   const handlePageChange = (pageNumber) => {
     setCurrent(pageNumber);
   };
-
+//-------------------- Start Tiến làm -----------------------
   let handleScrollUp = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -48,12 +50,17 @@ function product() {
 //Phần có thể Bạn Thích trong Product Details
 let listProductAPI = useSelector(state => state.product.listProduct);
 
+useEffect(() => {
+  setData(listProductAPI);
+},[listProductAPI]);
+
 let dispatch = useDispatch();
 
 useEffect(() => {
   dispatch(actionFetchProductAPI(current, pageSize));
 }, [dispatch, current, pageSize]);
 //Kết thức phần có thể Bạn Thích trong Product Details
+//--------------------End Tiến làm -----------------------
 
   return (
     <div>
@@ -73,12 +80,14 @@ useEffect(() => {
                   </Row>
                 </Col>
                 <Col span={20}>
+                {/* -------------- Tiến làm ----------------------- */}
                   <Row justify="center">
                     <Link to={`/ProductDetail/${item.id}`} onClick={handleScrollUp}>
-                      <h4 className="h3-css" align="center">
+                      <h4 align="center">
                         {item.name}
                       </h4>
                     </Link>
+                     {/* -------------- Tiến làm ----------------------- */}
                   </Row>
                 </Col>
                 <Col span={20}>
@@ -91,7 +100,7 @@ useEffect(() => {
 
             )}
           />
-          <Row justify="center">
+          <Row justify="center" style={{paddingBottom: '3%'}}>
           <Pagination
               current={current}
               onChange={handlePageChange}

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Input, Modal, Select } from 'antd';
+import { Form, Input, Modal, Select,message } from 'antd';
 import { actionCloseForm } from '../../../Redux/Action/UpdateOrderDetailsFormAction';
 import { actionFetchProductAPI, actionUpdateProductAPI } from '../../../Redux/Action/ProductAction';
+import axios from 'axios';
 
 function ModalUpdate(props) {
-  let { editItem, listProductAPI, listCategoryAPI,refreshData } = props;
+  let { editItem, listProductAPI, listCategoryAPI,refreshData,successMessageUpdate,onhandleUpdateSucces } = props;
   let showform = useSelector((state) => state.updateorderdetailsForm.showForm) || false;
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   let currentPage = useSelector((state) => state.product.currentPage);
   let pageSize = useSelector((state) => state.product.pageSize);
-
+  let [listCategoryAPINopage,setListCategoryAPINopage]=useState([]);
   let [page, setPage] = useState(currentPage);
   let [productsName, setProductsname] = useState("");
   let [description, setDescription] = useState("");
@@ -19,10 +20,31 @@ function ModalUpdate(props) {
   let [priceL, setPriceL] = useState("");
   let [category, setCategory] = useState("");
   let [imageUrl, setImageUrl] = useState("");
-  
+  let [messageAPI, contextHolder2] = message.useMessage(null);
   let [idProduct,setIdProduct]=useState("");
  
 
+
+  useEffect(() => {
+    let fetchProductList = () => {
+      axios
+        .get("http://localhost:8080/api/v1/categories?page=0&size=9999", {
+          headers: {
+            // Authorization: "Basic " + btoa("Username1:123456"),
+            "content-type": "application/json",
+          },
+        })
+        .then((res) => {
+          setListCategoryAPINopage(res.data.content);
+        })
+        .catch((error) => {
+          
+          console.error('Error fetching product list: ', error);
+        });
+    };
+  
+    fetchProductList(); 
+  }, []);
 
   useEffect(() => {
     if (editItem) {
@@ -32,13 +54,8 @@ function ModalUpdate(props) {
       setDescription(editItem.description);
       setPriceM(editItem.priceM);
       setPriceL(editItem.priceL);
-      let category = listCategoryAPI.find(item => item.CategoryId === editItem.CategoryId);
-      // setCategory(editItem.categories);
-      console.log(listCategoryAPI);
-      const categoryId =category;
-      console.log(categoryId.id);
-            setCategory(editItem.categories);
-      console.log(editItem);
+      let category = listCategoryAPINopage.find(item => item.name===editItem.categories);
+      setCategory(category.id);
       setImageUrl(editItem.imageUrl);
     }
   }, [editItem]);
@@ -66,7 +83,8 @@ function ModalUpdate(props) {
       
       
     })).then(res => {
-      console.log('update product', res);
+      
+      onhandleUpdateSucces(); 
       refreshData(fetchProduct());
     })
     

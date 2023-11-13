@@ -8,7 +8,6 @@ import axios from "axios";
 import { Button, Row, Col, Image, Carousel, List, Avatar } from "antd";
 import { Link } from "react-router-dom";
 
-  
 function Content() {
   // data list product
   const [data, setData] = useState([]);
@@ -23,7 +22,6 @@ function Content() {
       .then((res) => {
         console.log(res);
         setData(res.data.content);
-        
       })
       .catch((err) => console.log(err));
 
@@ -62,7 +60,7 @@ function Content() {
         </Carousel>
 
         <div className="div-css1">
-          <h1 align="center">Danh sách sản phẩm </h1>
+          <h1  align="center" style={{paddingBottom: "3%"}}>Danh sách sản phẩm </h1>
           <Carousel ref={carouselRef} slidesToShow={4} dots={false}>
             {data.map((item) => (
               <div>
@@ -71,7 +69,7 @@ function Content() {
                 <Link to={`/ProductDetail/${item.id}`} onClick={handleScrollUp}>
                   {item.name}
                   </Link>
-                  
+
                 </h3>
               </div>
             ))}
@@ -94,11 +92,64 @@ function Content() {
           <div className="image-css1">
             <Image src="https://bizweb.dktcdn.net/100/477/681/themes/895448/assets/slider_1.jpg?1695629614469" />
           </div>
+
           <div>
-            <Row  className="row-css1" justify="center"   >
+            <h3 align="center" className="space-top">MENU HÔM NAY</h3>
+            <Row  className="space-top">
+              <Col span={8}></Col>
+              <Col span={2}>
+                <Button className="botton-product" >Trà sữa</Button>
+              </Col>
+              <Col span={2}>
+                <Button className="botton-product">Trà sữa</Button>
+              </Col>
+              <Col span={2}>
+                <Button className="botton-product">Trà sữa</Button>
+              </Col>
+              <Col span={2}>
+                <Button className="botton-product">Trà sữa</Button>
+              </Col>
+            </Row>
+            <div>
+              <Row className="space-top" justify="center">
+
+                <Col   span={20} offset={2}>
+                <List
+                grid={{ gutter: 16, xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 4 }}
+                  itemLayout="horizontal"
+                  dataSource={data}
+                  renderItem={(item, index) => (
+                    <Row >
+                      <Col span={20}>
+
+                          <Image className="image-css" src={item.imageUrl} />
+
+                      </Col>
+                      <Col span={20}>
+                      <Link to={`/ProductDetail/${item.id}`} onClick={handleScrollUp}>
+                      <h4 align="center">
+                        {item.name}
+                      </h4>
+                    </Link>
+                      </Col>
+                      <Col span={20}>
+                      <Row justify="center">
+                    <h5>Giá: {item.priceM.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</h5>
+                  </Row>
+                      </Col>
+                    </Row>
+                  )}
+                />
+                </Col>
+
+              </Row>
+            </div>
+          </div>
+          <div>
+            <Row className="row-css1" justify="center">
               <Col span={10} className="Col_color">
                 <DemoBox value={100}>
-                  <div className="css_div"  align="middle">
+                  <div className="css_div" align="middle">
                     <h3>THỜI GIAN MỞ CỬA</h3>
                     <p>
                       “Winggo" - Một lời ngỏ mộc mạc để mình ngồi lại bên nhau

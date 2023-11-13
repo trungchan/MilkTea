@@ -103,16 +103,7 @@ h5.active_tab
     font-weight: 600;
     cursor: pointer;
 }
-@media only screen and (max-width:768px) {
-    .product_details h2
-    {
-        font-size: 1.3rem;
-    }
-    .rating_group
-    {
-        column-gap: 1rem!important;
-    }
-}
+
 .item_detail
 {
     box-sizing: border-box;
@@ -262,4 +253,15 @@ nav
 nav a{
     color: black;
     background-color: none;
+}
+@media only screen and (max-width:768px) {
+    .product_details h2
+    {
+        font-size: 1.3rem;
+    }
+    .rating_group
+    {
+        column-gap: 1rem!important;
+    }
+   
 }

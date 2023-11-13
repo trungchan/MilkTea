@@ -20,7 +20,6 @@ export let actionFetchListPAYMENTThunk=(listPAYMENT_param)=>{
 //AddnewPAYMENT
 export let actionAddPAYMENTAPI=(newPaymentData)=>{
     return (dispatch)=>{
-        console.log("abd");
         return addnewPayment(newPaymentData).then ((res)=>{
             dispatch(actionAddnewPAYMENTThunk(res));
         });

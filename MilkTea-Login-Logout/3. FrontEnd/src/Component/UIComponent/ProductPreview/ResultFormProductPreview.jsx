@@ -17,6 +17,7 @@ function ResultFormProductPreview(props) {
   let currentPage = useSelector((state) => state.productpreview.currentPage);
   let pageSizeAPI = useSelector((state) => state.productpreview.pageSize);
   let total = useSelector((state) => state.productpreview.total);
+  let [totalElement, setTotalElements] = useState('');
   //Message
   let [messageApi, contextHolder] = message.useMessage();
 
@@ -32,7 +33,7 @@ function ResultFormProductPreview(props) {
     5: <SmileOutlined />,
   };
 
-  console.log(editItem);
+
   //----------End Declare ----------
 
   //useEffect
@@ -48,8 +49,30 @@ function ResultFormProductPreview(props) {
     setDataSource(listProductPreview);
   }, [listProductPreview]);
 
+  useEffect(() => {
+
+    let fetchProductList = () => {
+      axios
+        .get("http://localhost:8080/api/v1/ProductReviews", {
+          headers: {
+
+            "content-type": "application/json",
+          },
+        })
+        .then((res) => {
+          setTotalElements(res.data.totalElements);
+        })
+        .catch((error) => {
+
+          console.error('Error fetching product list: ', error);
+        });
+    };
+
+    dispatch(actionFetchProductReviewAPI(page, pageSize));
+    fetchProductList();
+  }, [dispatch, page, pageSize]);
   //--------End useEffect---------
-  console.log(totalPage);
+
   //Function
   const handlePageChange = (page, pageSize) => {
     setPage(page);
@@ -135,23 +158,26 @@ function ResultFormProductPreview(props) {
       ),
     },
   ]
-    let filteredDataSource = dataSource.filter((record) => {
-      return (
-        record.reviewText.includes(searchedText) || 
-        (record.reviewDate.toString()).includes(searchedText) || 
-    (record.productsProductName.toString()).includes(searchedText) ||
-      (record.rating.toString()).includes(searchedText)           
+  let filteredDataSource = dataSource.filter((record) => {
+    let searchTextLowerCase = searchedText.toLowerCase();
+    return (
+      (record?.reviewText?.toString()?.toLowerCase().includes(searchTextLowerCase)) ||
+      (record?.reviewDate?.toString()?.toLowerCase().includes(searchTextLowerCase)) ||
+      (record?.productsProductName?.toString()?.toLowerCase().includes(searchTextLowerCase)) ||
+      (record?.rating?.toString()?.toLowerCase().includes(searchTextLowerCase))
     );
   });
-  // console.log(filteredDataSource);
+
+
   return (
     <>
+      <h1>List Reviews</h1>
       <Input.Search placeholder="Search here ..." style={{ marginBottom: 8 }} onSearch={(value) => { setSearchedText(value) }} />
       {contextHolder}
       <Table columns={columns} dataSource={filteredDataSource}
         pagination={{
           pageSize: pageSizeAPI,
-          total: totalPages * pageSizeAPI,
+          total: totalElement,
           onChange: handlePageChange,
           showSizeChanger: false,
           showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,

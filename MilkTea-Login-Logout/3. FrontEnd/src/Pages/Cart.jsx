@@ -13,7 +13,6 @@ const Cart = () => {
   const cartAddItem = useSelector((state) => state.addToCart.listItem);
   let totalAmount = useSelector((state) => state.addToCart.totalAmount);
   const dispatch = useDispatch();
-  console.log(cartAddItem);
   const decreaseQuantity = (id) => {
     dispatch(actionDecrement(id));
   };

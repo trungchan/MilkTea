@@ -19,10 +19,10 @@ function AdminPage() {
                 {/* className="SideMenuAndPageContent" */}
                 
                     <Row >
-                        <Col span={2}>
+                        <Col span={4}>
                             <Slidebar></Slidebar>
                         </Col>
-                        <Col span={22}>
+                        <Col span={20}>
                             <PageContent></PageContent>
                         </Col>
 

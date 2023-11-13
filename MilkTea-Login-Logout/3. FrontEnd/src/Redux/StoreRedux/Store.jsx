@@ -3,6 +3,6 @@ import { RootReducer } from "../Reducer/Root";
 import thunk from 'redux-thunk';
 
 
-const midleware=compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const midleware=compose(applyMiddleware(thunk));
 
 export let  storeRedux=createStore(RootReducer,midleware);

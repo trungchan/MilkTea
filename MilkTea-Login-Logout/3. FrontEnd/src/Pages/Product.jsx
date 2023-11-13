@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionFetchProductAPI } from '../Redux/Action/ProductAction';
 import { actionFetchCategoryAPI } from '../Redux/Action/CategoryAction';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import '../style/productcss.css';
 import ProductDetail from '../Pages/ProductDetail';
 // import { formatMoney } from "react-intl";
@@ -13,7 +13,6 @@ function Product(props) {
     let listProductAPI = useSelector(state => state.product.listProduct);
     let dispatch = useDispatch();
     let listProduct = listProductAPI;
-    console.log(listProduct);
 
     const totalPages = useSelector((state) => state.orderDetails.totalPages);
 
@@ -40,12 +39,11 @@ function Product(props) {
     // let setTraSuaTunay = listProductAPI.filter(product => product.categories == 'Set Trà Sữa Tự Nấu');
 
     let listCategory = useSelector(state => state.category.listCategory);
+    let lists = useSelector(state => state.listProduct);
 
     useEffect(() => {
         setFilteredProducts(listProductAPI);
     }, [listProductAPI]);
-
-    console.log(filteredProducts);
 
     let filterProductsByCategory = (category) => {
         if (category === 'All') {

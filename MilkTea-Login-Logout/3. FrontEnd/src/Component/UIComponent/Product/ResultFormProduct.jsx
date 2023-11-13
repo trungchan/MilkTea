@@ -27,13 +27,14 @@ function ResultFormProduct(props) {
   let [page, setPage] = useState(currentPage);
   let [totalPage, setTotalPage] = useState(1);
   let [searchedText, setSearchedText] = useState("");
-  
+  let [successUpdate, setSuccessUpdate] = useState(null);
   let [successMessage, setSuccessMessage] = useState(null);
-
+  let [messageAPI, contextHolder1] = message.useMessage(null);
+  let [messageCreate, contextCreate] = message.useMessage(null);
  
   const [shouldRefreshData, setShouldRefreshData] = useState(false);
   //----------End Declare ----------
-
+ 
   //useEffect
   useEffect(() => {
     
@@ -82,6 +83,28 @@ function ResultFormProduct(props) {
   //--------End useEffect---------
 
   //-----------------------Function----------------------
+  let createSuccess=()=>{
+    messageCreate.open({
+      type: 'success',
+      content: 'Tạo sản phẩm thành công!',
+     
+    });
+  }
+  let success = () => {
+    messageAPI.open({
+      type: 'success',
+      content: 'Cập nhật thành công!',
+     
+    });
+  };
+
+let handleCreateSuccess=()=>{
+  createSuccess();
+}
+  let handleUpdateSucces=()=>{
+    success();
+   
+  }
   let showSuccessMessage = (message) => {
     setSuccessMessage(message);
   };
@@ -204,18 +227,11 @@ let onHandDelete = (id) => {
   return (
     <>
     <div className="searchContainer">
-      
-      <ButtonCreateNewProduct listCategoryAPI={listCategoryAPI}  className="createButton"  onShowSuccessMessage={showSuccessMessage}/>
+    <h1>List Products</h1> 
+      <ButtonCreateNewProduct listCategoryAPI={listCategoryAPI}  className="createButton"  onShowSuccessMessage={showSuccessMessage} onHandleCreate={handleCreateSuccess}/>
       <Input.Search placeholder="Search here ..." style={{ marginBottom: 8 }} onSearch={(value) => { setSearchedText(value) }} />
-      {/* {showSuccessAlert && (
-                <Alert
-                    message="Thông báo thành công"
-                    description="Tạo sản phẩm thành công."
-                    type="success"
-                    showIcon
-                    closable
-                />
-            )}    */}   
+            {contextCreate}
+            {contextHolder1}
              {contextHolder}
       <Table key={shouldRefreshData ? 'refreshedKey' : 'normalKey'} columns={columns} dataSource={filteredDataSource}
         pagination={{
@@ -227,7 +243,9 @@ let onHandDelete = (id) => {
         }}
         rowKey="id"
       ></Table>
-      <ModalUpdate editItem={editItem} listProductAPI={listProductAPI} listCategoryAPI={listCategoryAPI} refreshData={() => setShouldRefreshData(!shouldRefreshData)}  />
+      <ModalUpdate editItem={editItem} listProductAPI={listProductAPI} listCategoryAPI={listCategoryAPI} refreshData={() => setShouldRefreshData(!shouldRefreshData)}  
+       onhandleUpdateSucces={handleUpdateSucces}
+      />
       
 
     </div>

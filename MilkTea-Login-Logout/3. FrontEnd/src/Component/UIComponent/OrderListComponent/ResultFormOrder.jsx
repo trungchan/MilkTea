@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ResultFormItem from './ResultFormItem';
-import { Table, Button, Input, Modal,message } from 'antd';
+import { Table, Button, Input, Modal, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionFetchListOrderDetailsAPI } from '../../../Redux/Action/OrderDetailsAction';
 import ReactPaginate from 'react-paginate';
@@ -24,7 +24,8 @@ function ResultFormOrder(props) {
   let [totalPage, setTotalPage] = useState(1);
   let [searchedText, setSearchedText] = useState("");
   let [messageApi, contextHolder] = message.useMessage();
-  console.log(editItem);
+  let [totalElement, setTotalElements] = useState('');
+
   //----------End Declare ----------
 
   //useEffect
@@ -40,14 +41,37 @@ function ResultFormOrder(props) {
     setDataSource(listOrderDetailsAPI);
   }, [listOrderDetailsAPI]);
 
+  useEffect(() => {
+
+    let fetchProductList = () => {
+      axios
+        .get("http://localhost:8080/api/v1/Orderdetails", {
+          headers: {
+
+            "content-type": "application/json",
+          },
+        })
+        .then((res) => {
+          setTotalElements(res.data.totalElements);
+        })
+        .catch((error) => {
+
+          console.error('Error fetching product list: ', error);
+        });
+    };
+
+    dispatch(actionFetchListOrderDetailsAPI(page, pageSize));
+    fetchProductList();
+  }, [dispatch, page, pageSize]);
+  console.log(totalElement);
   //--------End useEffect---------
-  console.log(totalPage);
+
   //Function
   const handlePageChange = (page, pageSize) => {
     setPage(page);
   };
 
-  let fecthOrderDetails=()=>{
+  let fecthOrderDetails = () => {
     dispatch(actionFetchListOrderDetailsAPI(page, pageSize));
   }
   let onHandDelete = (id) => {
@@ -58,12 +82,12 @@ function ResultFormOrder(props) {
       onOk: () => {
         dispatch(actionFetchDeleteOrderDetailsAPIbyID(id))
           .then(() => {
-            
-            
+
+
             messageApi.open({
               type: 'success',
               content: 'Sản Phẩm Đã Xóa',
-              
+
             });
             fecthOrderDetails();
           })
@@ -72,7 +96,7 @@ function ResultFormOrder(props) {
           });
       }
     });
-   
+
   }
   let onhandleEdit = (orderDetailsItem) => {
     dispatch(actionShowForm(orderDetailsItem));
@@ -87,26 +111,17 @@ function ResultFormOrder(props) {
     {
       title: 'Tên Sản Phẩm',
       dataIndex: 'productsName',
-      filterValue: [searchedText],
-      onFilter: (value, record) => {
-        return record.productsName.includes(value);
-      }
+      
     },
     {
       title: 'Số Lượng',
       dataIndex: 'quantity',
-      filterValue: [searchedText],
-      onFilter: (value, record) => {
-        return record.quantity.includes(value);
-      }
+     
     },
     {
       title: 'Kích Thước',
       dataIndex: 'size',
-      filterValue: [searchedText],
-      onFilter: (value, record) => {
-        return record.size.includes(value);
-      }
+     
     },
     {
       title: 'Giá Tiền',
@@ -135,9 +150,10 @@ function ResultFormOrder(props) {
       (record.size.toString()).includes(searchedText)
     );
   });
-  console.log(filteredDataSource);
+
   return (
     <>
+      <h1>List Orders</h1>
       <div className="searchContainer">
         <Input.Search placeholder="Search here ..." style={{ marginBottom: 8 }} onSearch={(value) => { setSearchedText(value) }} className='searchInput' />
         {contextHolder}
@@ -145,13 +161,13 @@ function ResultFormOrder(props) {
           summary={() => (
             <Table.Summary >
               {/* <Table.Summary.Row> */}
-                <Table.Summary.Cell index={3} colSpan={26}> <p className="totalAmout">{total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p></Table.Summary.Cell>
+              <Table.Summary.Cell index={3} colSpan={26}> <p className="totalAmout">{total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p></Table.Summary.Cell>
               {/* </Table.Summary.Row> */}
             </Table.Summary>
           )}
           pagination={{
             pageSize: pageSizeAPI,
-            total: totalPages * pageSizeAPI,
+            total: totalElement,
             onChange: handlePageChange,
             showSizeChanger: false,
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,

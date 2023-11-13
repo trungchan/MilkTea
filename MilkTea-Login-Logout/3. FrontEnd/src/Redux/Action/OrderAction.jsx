@@ -21,7 +21,7 @@ export let actionFetchOrderThunk=(listOrder_param)=>{
 export let actionAddNewOrderAPI =(newOrder)=>{
     return (dispatch)=>{
         return addNewOrder(newOrder).then((res)=>{
-            dispatch(actionAddnewOrderThunk());
+            dispatch(actionAddnewOrderThunk(newOrder));
         });
     };
 };

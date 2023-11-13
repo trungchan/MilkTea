@@ -108,8 +108,9 @@ img
 {
   position: relative;
 }
-.badge_count{
+.badge_count1{
   position: absolute;
+  
 }
 td i img {
   cursor: pointer;

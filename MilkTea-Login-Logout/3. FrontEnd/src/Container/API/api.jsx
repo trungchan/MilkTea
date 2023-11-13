@@ -20,6 +20,6 @@ export const api = (method_param, endpoint_param, payload) => {
     })
     .catch((error) => {
       console.log(error);
-      throw new Error(error);
+      // throw new Error(error);
     });
 };
