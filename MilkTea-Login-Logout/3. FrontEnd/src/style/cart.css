@@ -1,0 +1,114 @@
+.cart {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+  }
+  .cart_Title {
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight:600;
+    margin-bottom: 16px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+  }
+  th {
+    text-align: center;
+  }
+  td {
+    vertical-align: middle;
+  }
+  .cart-product-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .cart-product-quantity button {
+    border: none;
+    background-color: transparent;
+    height: 110px;
+    cursor: pointer;
+  }
+  .cart-product-quantity .count {
+    margin: 0 8px;
+  }
+  .totalPrice {
+    text-align: right;
+  }
+  .table  tr td img{
+    width: 55% !important;
+    height: 55% !important;
+    object-fit: cover;
+}
+td i img {
+    cursor: pointer;
+}
+td , th{
+    color:  #0a1d37;
+}
+.product-image {
+    width: 50px; /* Adjust the width to your desired size */
+    height: auto; /* Maintain the aspect ratio */
+    object-fit: cover;
+}
+.btn
+{
+    background-color: grey;
+    width: 10px;    
+    height: 10px;
+}
+.cart-total
+{
+    margin-left: 600px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.total1{
+  margin-left:165px;
+}
+.buy_btn_mua a:hover {
+  color: black; /* Màu chữ khi hover */
+  text-decoration: none; /* Loại bỏ gạch chân khi hover */
+}
+.group_btn_cart
+{
+  margin-left: 600px;
+  display: flex;
+  gap:5px;
+  margin-bottom: 10px;
+}
+.group_btn_cart a:hover
+{
+  background: none;
+  /* border-radius: 20px; */
+}
+.btn_delete{
+  background-color: none ;
+  border: none;
+  background: none;
+}
+
+.larger-button
+{
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.2em;
+  background-color: #ad6800;
+  color: white;
+}
+.larger-button:hover
+{
+  
+  background-color: #fff;
+  color: #ad6800;
+}

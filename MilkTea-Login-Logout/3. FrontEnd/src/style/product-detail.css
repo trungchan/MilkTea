@@ -1,0 +1,267 @@
+.product_details
+{
+  margin-top: 50px;  
+  text-align: left;
+ 
+}
+.trasua
+{
+    background-image: url("https://bizweb.dktcdn.net/100/477/681/themes/895448/assets/bg-top-product.jpg?1695629614469") ;
+    width: 100%;
+}
+.product_details h2
+{
+    font-size: 1.8rem;
+    margin-bottom: 10px ;
+}
+.product_rating span i
+{
+    color:coral;
+}
+.product_rating p span
+{
+    color: coral;
+    font-weight: 500;
+}
+.product_price
+{
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: left;
+}
+.tap_wrapper
+{
+    color:var(#0a1d37);
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+h5.active_tab
+{
+    border-bottom: 2px solid #5a2c14; 
+}
+.active_tab
+{
+    font-weight: 600;
+    
+}
+.tab_content
+{
+    line-height: 30px;
+}
+.review_wrapper ul li span
+{
+    color:coral;
+    font-weight: 600;
+}
+.review_wrapper ul li p
+{
+    margin-top: 10px;
+}
+.review_form
+{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+}
+.review_form h4
+{
+    font-size: 1.2re;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.rating_group input[type="radio"]
+{
+    display: none;
+}
+.star{
+    cursor: pointer;
+    transition: color 200ms;
+}
+.form_group input, .form_group textarea
+{
+    width: 100%;
+    border: 1px  solid var(--primary-color);
+    border-radius: 5px;
+    padding: 8px 20px;
+    border: 1px solid black;
+}
+.form_group input:focus,.form_group textarea:focus
+{
+    outline: none;
+}
+.form_group
+{
+    margin-bottom: 30px;
+}
+.form_group span
+{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    color: coral;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.item_detail
+{
+    box-sizing: border-box;
+}
+    
+.item_detail img
+{
+    width: 100%;
+    height: 100%;
+}
+.buy_btn
+{
+    margin-left: 10px;
+    border-radius: 50px;
+    border: 2px solid #84411d;
+    font-size: 1.1em;
+    font-weight: bold;
+    color:#84411d ;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f9f1;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+   
+}
+.buy_btn:hover
+{
+    background-color:#84411d;
+    color: white;
+}
+.buy_btn a
+{
+    color: white;
+    /* background-color: blue; */
+}
+.group_btn
+{
+    padding-bottom: 30px;
+    border-bottom: 0.1px solid #ebebeb;
+}
+.buy_btn_mua{
+    background-color: #84411d;
+    margin-left: 10px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    color: white;
+    border: none;
+}
+.buy_btn_mua:hover
+{
+    background-color: #5a2c14;
+}
+.sizeProduct
+{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    
+    
+    
+}
+.radio
+{
+    display: inline-flex;
+    /* padding: 5px; */
+    margin: 5px;
+    border-radius: 5px;
+    border:1px solid black
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.25); */
+
+}
+.radio_input
+{
+    display: none;
+
+}
+.radio_lable
+{
+    padding: 8px 14px;
+    font-size: 15px;
+}
+.radio_input:checked +.radio_lable
+{
+    border: 1px solid orangered;
+    border-radius: 5px;
+}
+.decre
+{
+    border: 1px solid black;
+    background-color: white;
+    width: 30px;    
+    height: 28px;
+}
+.count
+{
+    /* border: 0.5px solid black; */
+    background-color: white;
+    width: 40px;
+    border: 1px solid;
+    text-align: center;
+}
+.incre
+{
+    border: 1px solid black;
+    background-color: white;
+    width: 30px;    
+    height: 28px;
+}
+.descript,.rev,.instruct{
+    border-bottom: 1;
+    border-color: 'divider';
+}
+.quantity
+{
+    display:  flex;
+}
+.increanddecre
+{
+    margin-left: 20px;
+}
+.buy_btn_review
+{
+    background-color: #81bb41;
+    color: white;
+    border: none;
+   border-radius: 3px;
+}
+.ri-shopping-cart-line
+{
+    color: #81bb41;
+    margin-right: 5px;
+}
+.related_title
+{
+    text-align: center;
+    font-weight: bold;
+}
+nav
+{
+    text-align: left;
+    padding: 0;
+}
+nav a{
+    color: black;
+    background-color: none;
+}
+@media only screen and (max-width:768px) {
+    .product_details h2
+    {
+        font-size: 1.3rem;
+    }
+    .rating_group
+    {
+        column-gap: 1rem!important;
+    }
+   
+}

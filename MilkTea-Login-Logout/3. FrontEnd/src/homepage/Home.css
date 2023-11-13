@@ -1,0 +1,169 @@
+.headerStyle {
+    text-align: 'center';
+    color: '#fff';
+    
+    padding-inline: 50;
+    
+    background-color:#84401b;
+    width: auto;
+    height: 64px;
+    
+  }
+  
+  .home-page {
+    padding: 20px;
+       /* padding-top: 1.5em !important; 
+       padding-bottom: 1.5em !important; */
+       align-items: center;
+       justify-content: center;
+       cursor: pointer; 
+       
+  }
+
+  .Seach_bt{
+    width: 60%;
+  }
+
+  .contentStyle{
+    text-align: 'center';
+    min-height: 120;
+    line-height: '120px';
+    color: '#fff';
+    background-color: white;
+  }
+
+  .list_product{
+
+    height: 3em;
+  }
+  .footerStyle{
+    text-align: 'center';
+    color: '#fff';
+    background-color: rgb(10, 11, 12);
+  };
+
+  .slick-dots li button{
+   
+    background-color: black !important;
+  }
+  .slick-dots li button:before{
+    background-color: black !important;
+  }
+
+  .Logo {
+max-width: 100%;
+height: auto;
+
+  }
+
+  .image-css {
+  height: 300px !important
+}
+
+.h3-css{
+  width: 315px !important
+}
+
+.p1 {
+ color: white;
+}
+
+.h2 {
+  color: chocolate;
+}
+
+.color-button {
+  background-color: chocolate;
+
+}
+
+.color-button :hover {
+ color: black;
+
+}
+
+.Col_color {
+  padding: 80px 56px 96px 65px;
+  background: #84401b;
+  min-height: 443px;
+  /* margin-top: 14px; */
+  display: flex;
+  text-align: center;
+  color: white;
+  }
+
+.css_div {
+ padding-top: 10em;
+}
+  
+.col-css {
+  padding-top: 1em;
+}
+
+.row-css1 {
+  padding-top: 4em;
+  padding-bottom: 5em;
+ 
+}
+
+.image-css1 {
+  padding-top: 2em;
+}
+
+.div-css1 {
+  padding-top: 2em;
+}
+a{
+  text-decoration: none;
+}
+a:hover{
+  background-color: white;
+}
+.item1
+{
+  display: flex;
+  justify-content:space-between;
+  padding: 10px;
+}
+
+.space-top{
+  padding-top: 3% !important
+}
+.cartCount{
+  position:relative;
+}
+.badge_count
+{
+  position: absolute;
+ 
+  
+}
+.text-home-page{
+    margin-top: 200px;
+    margin-left: 40px;
+    font-weight: 600;
+    font-size: 35px;
+    line-height: 21px;
+}
+.text-home-page-2{
+  margin-left: 40px;
+  
+    
+    font-size: 20px;
+    line-height: 30px;
+}
+.header-text{
+    margin-top: 30px;
+}
+.button-color{
+  background-color: #fff;;
+    height: 40px;
+    color: #84401b;
+    width: 60%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    align-items: center;
+    justify-content: center;
+}

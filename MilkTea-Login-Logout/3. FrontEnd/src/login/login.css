@@ -1,0 +1,22 @@
+body {
+    background-color: #9A616D  ;
+  }
+ 
+
+  body {
+   font-family: Roboto, Helvetica, Arial, sans-serif;
+  }
+  .button-color{
+    background-color: black;
+    height: 40px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
