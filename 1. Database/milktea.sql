@@ -83,7 +83,9 @@ CREATE TABLE ProductReviews (
 DROP TABLE IF EXISTS Token;
 CREATE TABLE Token(
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	token VARCHAR(800) NOT NULL
+	token VARCHAR(800) NOT NULL,
+    expiration date,
+    user_agent varchar(500)
 );
 INSERT INTO Categories(category_name)
 VALUES
@@ -124,7 +126,7 @@ VALUES 	('Set trà sữa trân châu đường đen đậm vị 6-8 Ly', 'Mô t�
         ('Trà Cam Đào Dâu Tây', 'Mô tả đang cập nhật', 38000, 48000, 6, 'https://bizweb.dktcdn.net/thumb/large/100/477/681/products/1.jpg?v=1686652805533'),
         ('Hồng Trà Vải', 'Mô tả đang cập nhật', 25000, 35000, 6, 'https://bizweb.dktcdn.net/thumb/large/100/477/681/products/tra-vai-min.jpg?v=1677293929867');
         
-INSERT INTO `Account` 		(email, user_name, phone_number, `password`, `role`) 
+INSERT INTO `Account` 		(user_name,email, phone_number, `password`, `role`) 
 VALUES 					    ('username1' ,'account11@gmail.com', '098974573'  , '123456' , 'ADMIN' ),
 							('username2' ,'account12@gmail.com', '0989745731' , '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi' ,  'ADMIN' ),
 							('username3' , 'account13@gmail.com','0989745732' , '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi' ,  'ADMIN' ),
