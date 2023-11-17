@@ -1,0 +1,17 @@
+.sidebar
+{
+    columns: 3;
+    padding: 5px;
+    background-color: white;
+    color: black;
+}
+a:hover{
+    background-color: aqua;
+}
+a, ul
+{
+   text-decoration: none;
+   list-style: none;
+  
+   
+}

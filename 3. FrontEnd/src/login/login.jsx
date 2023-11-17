@@ -19,8 +19,9 @@ const Login3 = () => {
   const [isRegistering, setIsRegistering] = useState(false);
 
   return (
-    <MDBContainer className="my-5">
-      <MDBCard className="login-form">
+    
+    <MDBContainer className="my-5 login-form" >
+      <MDBCard className="">
         <MDBRow className="g-0">
           <MDBCol md="6">
             <MDBCardImage
@@ -45,7 +46,7 @@ const Login3 = () => {
               
               {isRegistering ? (
                 <p
-                  className="mb-5 pb-lg-2"
+                  className="mb-5 pb-lg-2 my-3"
                   style={{
                     color: "#393f81",
                     display: "block",
@@ -81,7 +82,7 @@ const Login3 = () => {
                 </p>
               )}
               <div className="d-flex flex-row justify-content-start">
-                <h2 href="#!" className="small text-muted me-1">
+                <h2 href="#!" className="small text-muted me-1 login-f">
                   Terms of use.
                 </h2>
                 <h2 href="#!" className="small text-muted">
@@ -93,6 +94,7 @@ const Login3 = () => {
         </MDBRow>
       </MDBCard>
     </MDBContainer>
+    
   );
 };
 

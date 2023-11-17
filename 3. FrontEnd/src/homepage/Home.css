@@ -4,15 +4,20 @@
     
     padding-inline: 50;
     
-    background-color:#FFFF99;
+    background-color:#84401b;
     width: auto;
-    height: 7em;
+    height: 64px;
     
   }
   
   .home-page {
-       padding-top: 2em !important; 
-       padding-bottom: 2em !important; 
+    padding: 20px;
+       /* padding-top: 1.5em !important; 
+       padding-bottom: 1.5em !important; */
+       align-items: center;
+       justify-content: center;
+       cursor: pointer; 
+       
   }
 
   .Seach_bt{
@@ -28,7 +33,13 @@
   }
 
   .list_product{
-
+    
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    align-items: center;
+    justify-content: center;
     height: 3em;
   }
   .footerStyle{
@@ -52,11 +63,30 @@ height: auto;
   }
 
   .image-css {
-  height: 300px !important
+    max-width: 70%;
+    height: auto;
+    border-radius: 50%; /* Chuyển ảnh thành hình tròn */
+    overflow: hidden; /* Đảm bảo ảnh không bị vượt ra khỏi hình tròn */
 }
 
 .h3-css{
-  width: 315px !important
+  width: 315px !important;
+  font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: black !important;
+    text-align: center;
+  margin-top: 10px; /* Dãn cách giữa hình ảnh và tiêu đề */
+  
+  
+  
+}
+.h3-css a {
+  text-decoration: none; /* Loại bỏ gạch chân từ liên kết */
+  color: #333; /* Màu chữ của liên kết */
+}
+.h3-css a:hover {
+  color: #ff6600; /* Màu chữ khi di chuột qua liên kết */
 }
 
 .p1 {
@@ -78,9 +108,14 @@ height: auto;
 }
 
 .Col_color {
-background-color: chocolate;
-height: 32rem;
-}
+  /* padding: 80px 56px 96px 65px; */
+  background: #84401b;
+  min-height: 443px;
+  /* margin-top: 14px; */
+  display: flex;
+  text-align: center;
+  color: white;
+  }
 
 .css_div {
  padding-top: 10em;
@@ -102,4 +137,63 @@ height: 32rem;
 
 .div-css1 {
   padding-top: 2em;
+}
+a{
+  text-decoration: none;
+}
+/* a:hover{
+  background-color: white;
+} */
+.item1
+{
+  display: flex;
+  justify-content:space-between;
+  padding: 10px;
+}
+
+.space-top{
+  padding-top: 3% !important
+}
+.cartCount{
+  position:relative;
+}
+.badge_count
+{
+  position: absolute;
+ 
+  
+}
+.text-home-page{
+    margin-top: 200px;
+    margin-left: 40px;
+    font-weight: 600;
+    font-size: 35px;
+    line-height: 21px;
+}
+.text-home-page-2{
+  margin-left: 40px;
+  
+    
+    font-size: 20px;
+    line-height: 30px;
+}
+.header-text{
+    margin-top: 30px;
+}
+.button-color{
+  background-color: #fff;;
+    height: 40px;
+    color: #84401b;
+    width: 60%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    align-items: center;
+    justify-content: center;
+    /* margin-right: 200px; */
+}
+.custom-carousel {
+  width: 80%; /* Đặt chiều rộng theo ý muốn */
+  margin: 0 auto; /* Canh giữa theo chiều ngang */
 }

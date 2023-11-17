@@ -1,13 +1,13 @@
 import React from "react";
 import { Layout, Button, Space, Input, Row, Col, Image } from "antd";
-
+import Logo from "../assets/Logo.webp";
 const {  Footer } = Layout;
 
 function footer()  {
 
     return(
 
-<di>
+<div>
 
      <Footer className="footerStyle">
         <Row>
@@ -62,7 +62,7 @@ function footer()  {
           </Col>
         </Row>
       </Footer>
-</di>
+</div>
        
     )
 }

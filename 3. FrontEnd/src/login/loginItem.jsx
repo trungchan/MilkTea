@@ -2,33 +2,30 @@ import React, { useState } from "react";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../api/UserAPI";
-
+import { loginApi } from "../product/api";
+import axios from "axios";
+import { Button } from "antd";
 function loginItem() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  console.log("user::", userName);
-  console.log("password", password);
   // Khai báo Hook useNavigate
   const navigate = useNavigate();
+
   const loginBody = { userName, password };
   const handleLogin = () => {
-    loginRequest(loginBody)
+    const data = axios
+      .post(loginApi, loginBody)
       .then((res) => {
-        console.log("res::", res);
-        const token = res.token;
-        const role = res.role;
-        const userID = res.id;
+        console.log(res);
         // Lưu token vào localStorage
-        localStorage.setItem("token", token);
-        localStorage.setItem("role", role);
-        localStorage.setItem("id", userID);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("role", res.data.role);
+        localStorage.setItem("id", res.data.id);
+        localStorage.setItem("user", res.data.userName);
         alert("Đăng nhập thành công");
         navigate("/");
       })
-      .catch((error) => {
-        // Xử lý lỗi nếu có
-        console.error(error);
-      });
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -56,17 +53,24 @@ function loginItem() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <MDBBtn
+      
+
+      
+        <Button className="button-colorr"  onClick={handleLogin}>
+          Sign in
+        </Button>
+      
+      {/* <MDBBtn
         className="mb-4 px-5"
         color="dark"
         size="lg"
         onClick={handleLogin}
       >
         Login
-      </MDBBtn>
+      </MDBBtn> */}
       <a
         href="#!"
-        className="small text-muted mb-3"
+        className="small text-muted mb-3 my-2"
         style={{ display: "block", textAlign: "center" }}
       >
         Forgot password?

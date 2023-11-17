@@ -1,10 +1,41 @@
 body {
-    background-color: #9A616D  !important ;
+    background-color: #9A616D  ;
   }
  
 
   body {
    font-family: Roboto, Helvetica, Arial, sans-serif;
+  }
+  .button-colorr{
+    background-color: black;
+    height: 40px;
+    width: 300px;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 150px;
+    
+  } 
+  .button-color{
+    /* background-color: black;
+    height: 40px;
+    width: 300px;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 150px; */
+    
+  } 
+  .login-f{
+    margin-left: 220px;
   }
 
   

@@ -1,3 +1,4 @@
+import { Layout } from 'antd'
 import React from 'react'
 // import Homepage from "./homepage/Home"
 // import Content from  "./homepage/content"
@@ -8,7 +9,7 @@ function App() {
 
   return (
     <>
-    Aaaaaaaaaaaaaâ
+    <Layout/>
     {/* <Homepage/>
     <Content/>
     <Footer/> */}
